@@ -7,504 +7,444 @@
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Itim&display=swap" rel="stylesheet">
 <style>
   :root {
+    --pink-bg: #fff0f3;
     --pink-main: #ffb6c1;
-    --pink-dark: #d66c8b;
-    --pink-glow: rgba(255, 182, 193, 0.6);
-    --glass-bg: rgba(255, 255, 255, 0.35);
-    --glass-border: rgba(255, 255, 255, 0.6);
-    --text-main: #b85270;
-    --text-soft: #d48298;
+    --pink-dark: #e88fa1;
+    --pink-text: #d65a7a;
+    --white: #ffffff;
+    --text-dark: #b85270;
+    --text-light: #d48298;
+    --border-color: #ffcdd2;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
     font-family: 'Mitr', sans-serif;
-    color: var(--text-main);
+    color: var(--text-dark);
+    background-color: var(--pink-bg);
+    background-image: radial-gradient(var(--pink-main) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
     min-height: 100vh;
-    /* Soft Animated Background */
-    background: linear-gradient(-45deg, #ffe4e1, #fff0f5, #ffdde6, #fff5f8);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+  }
+
+  /* คอนเทนเนอร์หลัก (ทรงแอปมือถือ) */
+  .app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: #fffcfd;
+    min-height: 100vh;
+    box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
     position: relative;
-    overflow-x: hidden;
+    padding-bottom: 40px;
   }
 
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Grid pattern overlay for that Y2K touch */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
-    background-size: 20px 20px;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* ===== GLASSMORPHISM UTILITY ===== */
-  .glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 28px;
-    box-shadow: 0 8px 32px var(--pink-glow), inset 0 0 10px rgba(255,255,255,0.5);
-  }
-
-  /* ===== Y2K GLOSSY BUTTON UTILITY ===== */
-  .glossy-btn {
-    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,228,235,0.7) 100%);
-    border: 1px solid rgba(255,255,255,0.8);
-    border-radius: 50px;
-    color: var(--pink-dark);
-    font-family: 'Mitr', sans-serif;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.4), inset 0 2px 5px rgba(255,255,255,1);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    text-decoration: none;
-    display: inline-flex;
+  /* ===== HEADER & BANNER ===== */
+  .header-banner {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(135deg, #ffd1dc, #ffe4e1);
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
   }
-  .glossy-btn:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.6), inset 0 2px 5px rgba(255,255,255,1);
-  }
-
-  /* ===== DECORATIVE FLOATIES ===== */
-  .floaties { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  .floatie { position: absolute; opacity: 0.4; animation: floatUp linear infinite; filter: drop-shadow(0 2px 4px rgba(255,182,193,0.5)); }
-  @keyframes floatUp {
-    0%   { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
-    20%  { opacity: 0.6; }
-    80%  { opacity: 0.6; }
-    100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
-  }
-
-  /* ===== NAVBAR ===== */
-  nav {
-    position: sticky;
-    top: 10px;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.7);
-    border-radius: 50px;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    box-shadow: 0 4px 24px rgba(255, 182, 193, 0.3);
-    max-width: 460px;
-    margin: 10px auto;
-    width: 95%;
-  }
-  nav::-webkit-scrollbar { display: none; }
-  .nav-logo {
-    font-family: 'Itim', cursive;
-    font-size: 18px;
-    color: var(--pink-dark);
+  .header-banner::after {
+    content: '✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿';
+    position: absolute;
+    bottom: -10px;
+    color: #fffcfd;
+    font-size: 28px;
+    letter-spacing: 4px;
     white-space: nowrap;
-    margin-right: 5px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.8);
-  }
-  .nav-btn {
-    padding: 6px 16px;
-    font-size: 13px;
-    white-space: nowrap;
-    color: var(--pink-dark);
-    text-decoration: none;
-    background: rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 50px;
-    transition: 0.3s;
-  }
-  .nav-btn:hover, .nav-btn.active {
-    background: linear-gradient(135deg, #fff, #ffe4ec);
-    box-shadow: 0 2px 10px rgba(255, 182, 193, 0.5);
   }
 
-  /* ===== WRAPPER ===== */
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 10px 14px 80px;
-  }
-
-  /* ===== HERO ===== */
-  .hero {
-    padding: 35px 20px 25px;
+  /* ===== PROFILE ===== */
+  .profile-section {
     text-align: center;
-    margin-bottom: 24px;
+    margin-top: -55px;
     position: relative;
+    z-index: 10;
+    padding: 0 20px;
   }
-  .hero-avatar {
-    width: 100px;
-    height: 100px;
+  .profile-img-wrap {
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
-    border: 4px solid rgba(255,255,255,0.8);
-    margin: 0 auto 16px;
-    background: linear-gradient(135deg, #fff, #ffe4ec);
-    box-shadow: 0 8px 24px var(--pink-glow), inset 0 4px 8px rgba(255,255,255,1);
+    background: var(--white);
+    border: 4px solid var(--white);
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.5);
+    margin: 0 auto 10px;
     display: flex; align-items: center; justify-content: center;
     font-size: 40px;
     cursor: pointer;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
-  .hero-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
-  .avatar-upload { display:none; }
-  .avatar-hint {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(4px);
-    color: var(--pink-dark);
-    font-size: 10px; padding: 4px 0; font-weight: 600;
-  }
-  .hero-name {
+  .profile-img-wrap img { width:100%; height:100%; object-fit:cover; }
+  .profile-name {
     font-family: 'Itim', cursive;
-    font-size: 32px;
-    color: var(--pink-dark);
-    text-shadow: 0 2px 10px rgba(255,255,255,0.8), 2px 2px 0px #fff;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
+    font-size: 26px;
+    color: var(--pink-text);
+    margin-bottom: 4px;
   }
-  .hero-tag {
+  .profile-bio {
     font-size: 13px;
-    color: var(--text-main);
-    background: rgba(255,255,255,0.5);
-    padding: 4px 16px;
+    color: var(--text-light);
+    background: var(--white);
+    display: inline-block;
+    padding: 6px 16px;
     border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 18px;
-    border: 1px solid rgba(255,255,255,0.8);
+    border: 1.5px dashed var(--pink-main);
+    margin-bottom: 16px;
   }
-  .hero-socials { display: flex; gap: 12px; justify-content: center; }
-  .social-btn { padding: 10px 22px; font-size: 14px; }
-
-  /* ===== SECTION CARD ===== */
-  .section-card { margin-bottom: 24px; padding: 2px; }
-  .section-inner {
-    background: rgba(255,255,255,0.4);
-    border-radius: 26px;
-    padding: 20px;
+  .social-links {
+    display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
   }
-  .section-header { margin-bottom: 16px; text-align: center; }
-  .section-header h2 {
-    font-family: 'Itim', cursive;
-    font-size: 22px;
-    color: var(--pink-dark);
-    display: inline-block;
-    background: rgba(255,255,255,0.6);
-    padding: 6px 24px;
-    border-radius: 30px;
-    box-shadow: inset 0 2px 5px rgba(255,255,255,0.8);
-    border: 1px solid rgba(255,255,255,0.8);
-  }
-  .desc-text {
+  .social-btn {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    padding: 8px 24px;
+    border-radius: 25px;
     font-size: 14px;
+    color: var(--pink-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+  .social-btn:hover { background: var(--pink-bg); border-color: var(--pink-main); transform: translateY(-2px); }
+
+  /* ===== MENU TABS (MAIN NAV) ===== */
+  .main-nav {
+    display: flex; gap: 8px;
+    overflow-x: auto;
+    padding: 0 20px 20px;
+    scrollbar-width: none;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+  }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: 'Mitr', sans-serif;
+    color: var(--text-light);
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(255,182,193,0.2);
+  }
+  .nav-btn:hover { background: var(--pink-bg); color: var(--pink-text); border-color: var(--pink-main); }
+
+  /* ===== CUTE CONTENT BOX ===== */
+  .cute-box {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    border-radius: 24px;
+    margin: 0 20px 24px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
+  }
+  .box-title {
+    font-family: 'Itim', cursive;
+    font-size: 20px;
+    color: var(--pink-text);
+    text-align: center;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .box-title::before, .box-title::after { content: '🎀'; font-size: 16px; }
+
+  .desc-text {
+    font-size: 13px;
     line-height: 1.6;
     text-align: center;
-    background: rgba(255,255,255,0.5);
-    border-radius: 16px;
-    padding: 14px;
-    margin-bottom: 18px;
-    border: 1px solid rgba(255,255,255,0.7);
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    padding: 12px;
+    background: var(--pink-bg);
+    border-radius: 14px;
   }
 
-  /* ===== PRICE TABLE ===== */
-  .price-title { font-size: 14px; font-weight: 600; color: var(--pink-dark); margin-bottom: 10px; margin-top: 10px;}
-  .price-row {
+  /* ===== PRICE LIST ===== */
+  .price-header { font-size: 14px; color: var(--pink-text); font-weight: 500; margin-bottom: 8px; margin-top: 12px; }
+  .price-item {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 14px;
-    border-radius: 16px;
+    padding: 10px 0;
+    border-bottom: 1.5px dashed var(--border-color);
     font-size: 13px;
-    margin-bottom: 8px;
-    background: rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.6);
-    transition: 0.2s;
   }
-  .price-row:hover { background: rgba(255,255,255,0.7); transform: scale(1.01); }
-  .price-name { font-weight: 500; }
-  .price-val {
-    font-weight: 600; color: var(--pink-dark);
-    background: #fff; padding: 4px 12px;
-    border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  .price-note {
-    font-size: 12px; color: var(--text-main); margin-top: 12px;
-    padding: 12px; border-radius: 16px;
-    background: rgba(255,255,255,0.3); border: 1px dashed var(--pink-dark);
+  .price-item:last-child { border-bottom: none; }
+  .price-val { font-weight: 600; color: var(--pink-text); background: #fff0f3; border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 16px; }
+  
+  .note-box {
+    background: #fffcfd;
+    border: 1.5px dashed var(--pink-main);
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 16px;
     line-height: 1.6;
   }
 
-  /* ===== WORKS GRID ===== */
-  .works-label { font-size: 14px; font-weight: 600; color: var(--pink-dark); margin: 20px 0 12px; text-align: center;}
-  .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  /* ===== GALLERY (WORKS) ===== */
+  .works-label { font-size: 14px; font-weight: 600; color: var(--pink-text); margin: 20px 0 12px; text-align: center; }
+  .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .work-card {
-    background: rgba(255,255,255,0.5);
-    border: 1px solid rgba(255,255,255,0.8);
-    border-radius: 20px;
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    padding-bottom: 10px;
   }
   .work-img-wrap {
     width: 100%; aspect-ratio: 1/1;
-    background: rgba(255,255,255,0.3);
+    background: var(--pink-bg);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; position: relative;
   }
-  .work-img-placeholder { flex-direction: column; display: flex; align-items: center; gap: 6px; font-size: 12px; opacity: 0.6; }
-  .work-img-placeholder span { font-size: 32px; }
-  .work-info { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-  .work-title-input {
-    width: 100%; border: none; border-radius: 12px; padding: 8px 10px;
-    font-size: 13px; font-family: 'Mitr'; background: rgba(255,255,255,0.7);
-    color: var(--text-main); box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  .work-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; color: var(--text-light); }
+  .work-img-placeholder span { font-size: 24px; }
+  .work-info { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .work-input {
+    width: 100%; border: 1px solid var(--border-color); border-radius: 10px; padding: 6px 8px;
+    font-size: 12px; font-family: 'Mitr'; color: var(--text-dark); outline: none;
   }
-  .work-title-input:focus { outline: 2px solid var(--pink-main); }
-  .work-link-input { display: none; }
-  .btn-preview { width: 100%; padding: 8px 0; font-size: 13px; border-radius: 14px; }
-  
-  .add-work-btn {
-    grid-column: 1 / -1;
-    background: rgba(255,255,255,0.3);
-    border: 2px dashed var(--glass-border);
-    border-radius: 20px;
-    padding: 16px;
-    text-align: center; font-size: 14px; font-family: 'Mitr';
-    color: var(--pink-dark); cursor: pointer; transition: 0.3s;
-    margin-top: 10px;
+  .work-input:focus { border-color: var(--pink-main); }
+  .cute-btn {
+    width: 100%; background: var(--pink-main); color: var(--white);
+    border: none; border-radius: 10px; padding: 6px 0;
+    font-family: 'Mitr', sans-serif; font-size: 12px; cursor: pointer; transition: 0.2s;
   }
-  .add-work-btn:hover { background: rgba(255,255,255,0.6); }
+  .cute-btn:hover { background: var(--pink-dark); }
 
-  /* ===== ID CARD WORKS ===== */
-  .id-works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .id-work-img-wrap {
-    aspect-ratio: 1/1; border-radius: 16px; overflow: hidden; cursor: pointer;
-    background: rgba(255,255,255,0.4); border: 2px solid rgba(255,255,255,0.8);
+  /* ===== ID CARD GRID (3 Columns) ===== */
+  .id-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .id-img-wrap {
+    aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; cursor: pointer;
+    background: var(--pink-bg); border: 2px solid var(--border-color);
     display: flex; align-items: center; justify-content: center; position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   }
 
-  /* ===== FAQ & TABS ===== */
-  .tab-bar { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 5px; scrollbar-width: none; }
-  .tab-bar::-webkit-scrollbar { display: none; }
-  .tab-btn { padding: 8px 18px; font-size: 13px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid #fff; color: var(--text-main); white-space: nowrap; cursor: pointer;}
-  .tab-btn.active { background: #fff; color: var(--pink-dark); box-shadow: 0 4px 10px rgba(255,182,193,0.3); font-weight: 500;}
-  .tab-panel { display: none; animation: fadeIn 0.3s; }
-  .tab-panel.active { display: block; }
-  @keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
-  
-  .group-header { margin-bottom: 16px; text-align: center; }
-  .group-badge { background: #fff; color: var(--pink-dark); border-radius: 20px; padding: 6px 16px; font-size: 14px; font-weight: 500; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--pink-main); }
+  /* ===== ADD BUTTON ===== */
+  .add-btn-dashed {
+    background: transparent;
+    border: 2px dashed var(--pink-main);
+    color: var(--pink-text);
+    width: 100%;
+    padding: 14px;
+    border-radius: 16px;
+    font-family: 'Mitr', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: 0.2s;
+  }
+  .add-btn-dashed:hover { background: var(--pink-bg); }
 
-  .faq-item { background: rgba(255,255,255,0.5); border-radius: 18px; border: 1px solid #fff; margin-bottom: 10px; overflow: hidden; transition: 0.3s; }
-  .faq-q { padding: 14px 18px; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; }
-  .faq-a { padding: 0 18px; font-size: 13px; color: var(--text-soft); max-height: 0; overflow: hidden; transition: 0.3s; }
-  .faq-item.open { background: #fff; box-shadow: 0 4px 15px rgba(255,182,193,0.2); }
-  .faq-item.open .faq-a { max-height: 150px; padding: 10px 18px 16px; }
+  /* ===== PORTFOLIO TABS ===== */
+  .port-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; scrollbar-width: none; }
+  .port-tabs::-webkit-scrollbar { display: none; }
+  .port-tab-btn {
+    background: var(--white); border: 2px solid var(--border-color); padding: 6px 14px;
+    border-radius: 20px; font-size: 12px; font-family: 'Mitr'; color: var(--text-light);
+    white-space: nowrap; cursor: pointer;
+  }
+  .port-tab-btn.active { background: var(--pink-main); color: var(--white); border-color: var(--pink-main); }
+  .port-panel { display: none; animation: fadeIn 0.3s; }
+  .port-panel.active { display: block; }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(5px);} to{opacity:1; transform:translateY(0);} }
+  .group-badge { display: inline-block; background: var(--pink-bg); color: var(--pink-text); padding: 4px 14px; border-radius: 16px; font-size: 13px; font-weight: 500; margin-bottom: 12px; border: 1px solid var(--border-color); }
 
-  /* ===== HOW TO ORDER ===== */
-  .step { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.5); border: 1px solid #fff; border-radius: 20px; padding: 12px 16px; margin-bottom: 10px; }
-  .step-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #fff, #ffe4ec); color: var(--pink-dark); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; box-shadow: inset 0 2px 5px rgba(255,255,255,1), 0 2px 5px rgba(0,0,0,0.05); flex-shrink: 0; }
-  .step-text { font-size: 13px; }
+  /* ===== FAQ & STEPS ===== */
+  .faq-item { border: 2px solid var(--border-color); border-radius: 16px; margin-bottom: 10px; overflow: hidden; }
+  .faq-q { padding: 12px 16px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; background: var(--pink-bg); color: var(--pink-text); }
+  .faq-a { padding: 0 16px; font-size: 12px; color: var(--text-dark); max-height: 0; overflow: hidden; transition: 0.3s; background: var(--white); }
+  .faq-item.open .faq-a { max-height: 150px; padding: 12px 16px; border-top: 1px dashed var(--border-color); }
+
+  .step-row { display: flex; align-items: center; gap: 12px; background: var(--white); border: 2px solid var(--border-color); border-radius: 16px; padding: 12px; margin-bottom: 10px; }
+  .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--pink-main); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; flex-shrink: 0; }
+  .step-text { font-size: 13px; color: var(--text-dark); }
 
   /* ===== FOOTER ===== */
-  footer { text-align: center; margin-top: 20px; padding: 20px; }
-  .footer-title { font-family: 'Itim', cursive; font-size: 18px; color: var(--pink-dark); margin-bottom: 16px; }
-  .footer-socials { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
-  .footer-icon { width: 56px; height: 56px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; background: rgba(255,255,255,0.6); border: 2px solid #fff; box-shadow: 0 8px 20px rgba(255,182,193,0.4); transition: 0.3s; color: inherit; text-decoration: none; }
-  .footer-icon:hover { transform: translateY(-5px) scale(1.05); background: #fff; }
-  .footer-copy { font-size: 12px; color: var(--text-soft); }
+  footer { text-align: center; padding: 20px; margin-top: 20px; }
+  .footer-copy { font-size: 12px; color: var(--text-light); margin-top: 10px; }
 
   /* ===== MODALS ===== */
-  .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,200,210,0.3); backdrop-filter: blur(8px); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,182,193,0.5); backdrop-filter: blur(4px); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.show { display: flex; }
-  .modal-box { background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); border: 2px solid #fff; border-radius: 30px; padding: 30px 24px; width: 100%; max-width: 320px; text-align: center; box-shadow: 0 20px 50px rgba(255,182,193,0.5); animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-  @keyframes pop { 0% {transform: scale(0.8); opacity: 0;} 100% {transform: scale(1); opacity: 1;} }
-  .modal-title { font-family: 'Itim', cursive; font-size: 22px; color: var(--pink-dark); margin-bottom: 16px; }
-  .modal-link-box { background: rgba(255,255,255,0.6); border-radius: 14px; padding: 12px; font-size: 13px; color: var(--text-main); margin-bottom: 20px; border: 1px solid #fff; word-break: break-all; }
+  .modal-box { background: var(--white); border: 2px solid var(--border-color); border-radius: 24px; padding: 24px; width: 100%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(255,182,193,0.4); position: relative; }
+  .modal-close { position: absolute; top: 12px; right: 16px; font-size: 20px; color: var(--text-light); cursor: pointer; background: none; border: none; }
+  .modal-link-box { background: var(--pink-bg); border-radius: 12px; padding: 12px; font-size: 12px; color: var(--text-dark); margin: 16px 0; border: 1px dashed var(--pink-main); word-break: break-all; }
   .modal-btns { display: flex; gap: 10px; justify-content: center; }
-  .btn-copy { background: #fff; color: var(--pink-dark); }
-  .modal-close-icon { position: absolute; top: 16px; right: 20px; font-size: 24px; color: var(--text-soft); cursor: pointer; background: none; border: none; }
   
-  .img-modal-box { max-width: 360px; width: 100%; border-radius: 24px; overflow: hidden; border: 4px solid #fff; box-shadow: 0 20px 50px rgba(255,182,193,0.6); position: relative; animation: pop 0.3s; }
+  .img-modal-box { max-width: 360px; width: 100%; border-radius: 20px; overflow: hidden; border: 4px solid var(--white); box-shadow: 0 10px 30px rgba(255,182,193,0.6); position: relative; }
   .img-modal-box img { width: 100%; display: block; }
-  .img-close-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; color: var(--pink-dark); }
+  .img-close-btn { position: absolute; top: 10px; right: 10px; background: var(--white); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 16px; cursor: pointer; color: var(--pink-text); }
 </style>
 </head>
 <body>
 
-<div class="floaties" id="floaties"></div>
+<div class="app-container">
 
-<nav>
-  <div class="nav-logo">✿ NONIOAEY</div>
-  <a class="nav-btn" href="#web">งานเว็บ</a>
-  <a class="nav-btn" href="#idcard">ป้ายไอดี</a>
-  <a class="nav-btn" href="#portfolio">ผลงาน</a>
-  <a class="nav-btn" href="#faq">FAQ</a>
-</nav>
+  <div class="header-banner"></div>
 
-<div class="wrapper">
-
-  <div class="hero glass-panel">
-    <div class="hero-avatar" onclick="document.getElementById('avatarInput').click()" title="กดเพื่อเปลี่ยนรูป">
-      <span id="avatarIcon">🎀</span>
-      <img id="avatarImg" src="" style="display:none; position:absolute;top:0;left:0;" alt="avatar">
-      <div class="avatar-hint">เปลี่ยนรูป</div>
+  <div class="profile-section">
+    <div class="profile-img-wrap" onclick="document.getElementById('avatarInput').click()" title="กดเพื่อเปลี่ยนรูป">
+      <span id="avatarIcon">🌸</span>
+      <img id="avatarImg" src="" style="display:none; position:absolute;top:0;left:0;">
     </div>
-    <input type="file" id="avatarInput" accept="image/*" class="avatar-upload">
-    <div class="hero-name">NONIOAEY ✿</div>
-    <div class="hero-tag">รับทำป้ายขายไอดี · ทำเว็บร้าน · ปล่อยเช่ารหัส</div>
-    <div class="hero-socials">
-      <a class="glossy-btn social-btn" href="https://www.facebook.com/share/1De6NiueGU/?mibextid=wwXIfr" target="_blank">📘 FB</a>
-      <a class="glossy-btn social-btn" href="https://line.me/ti/p/xnh050s5VP" target="_blank">💬 Line</a>
+    <input type="file" id="avatarInput" accept="image/*" style="display:none;">
+    
+    <div class="profile-name">NONIOAEY</div>
+    <div class="profile-bio">รับทำป้ายขายไอดี · ทำเว็บร้าน · เช่ารหัส</div>
+    
+    <div class="social-links">
+      <a href="https://www.facebook.com/share/1De6NiueGU/?mibextid=wwXIfr" target="_blank" class="social-btn">📘 Facebook</a>
+      <a href="https://line.me/ti/p/xnh050s5VP" target="_blank" class="social-btn">💬 Line</a>
     </div>
   </div>
 
-  <div class="section-card" id="web">
-    <div class="glass-panel section-inner">
-      <div class="section-header"><h2>🌐 งานเว็บ</h2></div>
-      <div class="desc-text">รับทำเว็บไซต์ลิงก์ร้าน มีเทมเพลตและงานสั่งทำพิเศษ เริ่มต้นที่ <strong>69 บาท</strong> 🎀</div>
+  <div class="main-nav">
+    <a href="#web" class="nav-btn">🌐 งานเว็บ</a>
+    <a href="#idcard" class="nav-btn">🎴 ป้ายไอดี</a>
+    <a href="#portfolio" class="nav-btn">✨ ผลงาน</a>
+    <a href="#faq" class="nav-btn">❓ FAQ</a>
+    <a href="#howto" class="nav-btn">📝 วิธีสั่งซื้อ</a>
+  </div>
 
-      <div class="price-title">✦ เรทราคาเว็บ</div>
-      <div class="price-row"><span class="price-name">เว็บโอนเงิน</span><span class="price-val">69.-</span></div>
-      <div class="price-row"><span class="price-name">เว็บตัวอย่างผลงาน</span><span class="price-val">109.-</span></div>
-      <div class="price-row"><span class="price-name">เว็บรายละเอียดต่างๆ</span><span class="price-val">159.-</span></div>
-      <div class="price-row"><span class="price-name">ตัวอย่าง + รายละเอียด</span><span class="price-val">209.-</span></div>
-      
-      <div class="price-note">
-        ✨ แก้ฟรี 1 ครั้งก่อนส่งลิงก์ (หลังจากนั้นจุดละ 5 บาท)<br>
-        🖼️ รูป 1-3 ใส่ฟรี (เพิ่มรูปล่ะ 10 บาท)<br>
-        ⏳ รองาน 4-8 ชม. (คิวเยอะจะแจ้งล่วงหน้า)
-      </div>
+  <div class="cute-box" id="web">
+    <div class="box-title">งานเว็บ</div>
+    <div class="desc-text">รับทำเว็บไซต์ลิงก์ร้าน มีทั้งเทมเพลตให้เลือกและงานสั่งทำพิเศษ สามารถสอบถามได้ราคาเริ่มต้นที่ 69 บาท</div>
+    
+    <div class="price-header">✦ เรทราคาเว็บ</div>
+    <div class="price-item"><span>เว็บโอนเงิน</span><span class="price-val">69.-</span></div>
+    <div class="price-item"><span>เว็บตัวอย่างผลงาน</span><span class="price-val">109.-</span></div>
+    <div class="price-item"><span>เว็บรายละเอียดต่างๆ</span><span class="price-val">159.-</span></div>
+    <div class="price-item"><span>ตัวอย่างผลงาน + รายละเอียด</span><span class="price-val">209.-</span></div>
+    <div class="price-item"><span>เว็บอื่นๆ</span><span class="price-val">สอบถาม</span></div>
 
-      <div class="works-label">✿ ตัวอย่างงานเว็บ ✿</div>
-      <div class="works-grid" id="webWorksGrid"></div>
-      <button class="add-work-btn" onclick="addWorkCard('webWorksGrid','web')">＋ เพิ่มตัวอย่างงาน</button>
+    <div class="note-box">
+      🎀 แก้ฟรี 1 ครั้งก่อนส่งลิงก์ หลังส่งลิงก์แก้จุดละ 5 บาท<br>
+      🖼️ รูปที่ 1 - 3 ใส่ฟรี เพิ่มรูป รูปละ 10 บาท<br>
+      ⏳ รองาน 4 - 8 ชั่วโมง หากคิวเยอะจะแจ้งก่อน
+    </div>
+
+    <div class="works-label">✿ ตัวอย่างงานเว็บ ✿</div>
+    <div class="works-grid" id="webWorksGrid"></div>
+    <button class="add-btn-dashed" onclick="addWorkCard('webWorksGrid')">＋ เพิ่มรูปตัวอย่างงาน</button>
+  </div>
+
+  <div class="cute-box" id="idcard">
+    <div class="box-title">ป้ายไอดี</div>
+    <div class="desc-text">รับทำป้ายขายไอดี สวยงามน่ารัก น่าใช้งานสุดๆ</div>
+    
+    <div class="price-header">✦ Skin Rate</div>
+    <div class="price-item"><span>1 - 100 สกิน</span><span class="price-val">สกินละ 0.50.-</span></div>
+    <div class="price-item"><span>100+ สกิน</span><span class="price-val">สกินละ 1.00.-</span></div>
+
+    <div class="price-header">✦ Others</div>
+    <div class="price-item"><span>หัวป้าย</span><span class="price-val">35.-</span></div>
+    <div class="price-item"><span>ป้ายไฟ</span><span class="price-val">2.- / ชิ้น</span></div>
+    <div class="price-item"><span>ประดับ</span><span class="price-val">0.50.- / ชิ้น</span></div>
+
+    <div class="note-box">
+      🎀 แก้ฟรี 1 ครั้งก่อนส่งงาน หลังส่งงานแก้จุดละ 5 บาท<br>
+      ⏳ รองาน 4 - 8 ชั่วโมง หากคิวเยอะจะแจ้งก่อน
+    </div>
+
+    <div class="works-label">✿ ตัวอย่างป้ายไอดี <span style="font-size:11px;font-weight:normal;color:var(--text-light);">(กดรูปเพื่อขยาย)</span> ✿</div>
+    <div class="id-grid" id="idWorksGrid"></div>
+    <button class="add-btn-dashed" onclick="addIdCard()">＋ เพิ่มรูปป้าย</button>
+  </div>
+
+  <div class="cute-box" id="portfolio">
+    <div class="box-title">กลุ่มผลงาน</div>
+    
+    <div class="port-tabs">
+      <button class="port-tab-btn active" onclick="switchTab(this,'tab-block')">บล็อกป้าย</button>
+      <button class="port-tab-btn" onclick="switchTab(this,'tab-rov')">ROV</button>
+      <button class="port-tab-btn" onclick="switchTab(this,'tab-idv')">Identity V</button>
+      <button class="port-tab-btn" onclick="switchTab(this,'tab-form')">ฟอร์ม</button>
+      <button class="port-tab-btn" onclick="switchTab(this,'tab-course')">คอร์สสอน</button>
+    </div>
+
+    <div id="tab-block" class="port-panel active">
+      <div style="text-align:center;"><span class="group-badge">🎀 บล็อกป้ายเเละของตกเเต่ง</span></div>
+      <div class="works-grid" id="blockWorksGrid"></div>
+      <button class="add-btn-dashed" onclick="addWorkCard('blockWorksGrid')">＋ เพิ่มผลงาน</button>
+    </div>
+
+    <div id="tab-rov" class="port-panel">
+      <div style="text-align:center;"><span class="group-badge">⚔️ กลุ่ม ROV</span></div>
+      <div class="works-grid" id="rovWorksGrid"></div>
+      <button class="add-btn-dashed" onclick="addWorkCard('rovWorksGrid')">＋ เพิ่มผลงาน</button>
+    </div>
+
+    <div id="tab-idv" class="port-panel">
+      <div style="text-align:center;"><span class="group-badge">🎭 กลุ่ม Identity V</span></div>
+      <div class="works-grid" id="idvWorksGrid"></div>
+      <button class="add-btn-dashed" onclick="addWorkCard('idvWorksGrid')">＋ เพิ่มผลงาน</button>
+    </div>
+
+    <div id="tab-form" class="port-panel">
+      <div style="text-align:center;"><span class="group-badge">📋 กลุ่มฟอร์ม</span></div>
+      <div class="works-grid" id="formWorksGrid"></div>
+      <button class="add-btn-dashed" onclick="addWorkCard('formWorksGrid')">＋ เพิ่มผลงาน</button>
+    </div>
+
+    <div id="tab-course" class="port-panel">
+      <div style="text-align:center;"><span class="group-badge">📚 กลุ่มคอร์สสอนทำเว็บ</span></div>
+      <div class="works-grid" id="courseWorksGrid"></div>
+      <button class="add-btn-dashed" onclick="addWorkCard('courseWorksGrid')">＋ เพิ่มผลงาน</button>
     </div>
   </div>
 
-  <div class="section-card" id="idcard">
-    <div class="glass-panel section-inner">
-      <div class="section-header"><h2>🎴 ป้ายไอดี</h2></div>
-      
-      <div class="price-title">✦ Skin Rate</div>
-      <div class="price-row"><span class="price-name">1 - 100 สกิน</span><span class="price-val">สกินละ 0.50</span></div>
-      <div class="price-row"><span class="price-name">100+ สกิน</span><span class="price-val">สกินละ 1.00</span></div>
+  <div class="cute-box" id="howto">
+    <div class="box-title">วิธีสั่งซื้อ</div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text">ทัก FB หรือ Line เพื่อสอบถามคิวงาน</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text">ส่งข้อมูล รูปแบบ โทนสี ข้อความที่ต้องการ</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text">ตกลงราคาและชำระเงินล่วงหน้า</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text">รอรับงานสวยๆ ได้เลยภายใน 4 - 8 ชั่วโมง 🌸</div></div>
+  </div>
 
-      <div class="price-title">✦ Others</div>
-      <div class="price-row"><span class="price-name">หัวป้าย</span><span class="price-val">35.-</span></div>
-      <div class="price-row"><span class="price-name">ป้ายไฟ</span><span class="price-val">2.- / ชิ้น</span></div>
-      <div class="price-row"><span class="price-name">ประดับ</span><span class="price-val">0.50 / ชิ้น</span></div>
-
-      <div class="price-note">
-        ✨ แก้ฟรี 1 ครั้งก่อนส่งงาน (หลังจากนั้นจุดละ 5 บาท)<br>
-        ⏳ รองาน 4-8 ชม.
-      </div>
-
-      <div class="works-label">✿ ตัวอย่างป้ายไอดี ✿</div>
-      <div class="id-works-grid" id="idWorksGrid"></div>
-      <button class="add-work-btn" onclick="addIdCard()">＋ เพิ่มรูปป้าย</button>
+  <div class="cute-box" id="faq">
+    <div class="box-title">คำถามที่พบบ่อย</div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">จ่ายเงินช่องทางไหนได้บ้าง? <span>+</span></div>
+      <div class="faq-a">รับโอนผ่านบัญชีธนาคาร และ PromptPay จ้า</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">แก้เยอะคิดเงินเพิ่มไหม? <span>+</span></div>
+      <div class="faq-a">แก้ฟรีได้ 1 ครั้งก่อนส่งงานนะคะ หลังจากนั้นจะคิดจุดละ 5 บาทค่ะ 💕</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">รองานนานสุดกี่ชั่วโมง? <span>+</span></div>
+      <div class="faq-a">ปกติ 4-8 ชั่วโมงค่ะ แต่ถ้าวันไหนคิวเยอะจริงๆ จะแจ้งให้ทราบก่อนรับงานนะคะ</div>
     </div>
   </div>
 
-  <div class="section-card" id="portfolio">
-    <div class="glass-panel section-inner">
-      <div class="section-header"><h2>✨ กลุ่มผลงาน</h2></div>
-      
-      <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchTab(this,'tab-block')">บล็อกป้าย</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-rov')">ROV</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-idv')">IDV</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-form')">ฟอร์ม</button>
-        <button class="tab-btn" onclick="switchTab(this,'tab-course')">คอร์สสอน</button>
-      </div>
+  <footer>
+    <div class="footer-copy">design. @NONIOAEY 🌸</div>
+  </footer>
 
-      <div id="tab-block" class="tab-panel active">
-        <div class="group-header"><span class="group-badge">🎀 บล็อกป้าย & ของตกแต่ง</span></div>
-        <div class="works-grid" id="blockWorksGrid"></div>
-        <button class="add-work-btn" onclick="addWorkCard('blockWorksGrid','block')">＋ เพิ่มตัวอย่างงาน</button>
-      </div>
-      <div id="tab-rov" class="tab-panel">
-        <div class="group-header"><span class="group-badge">⚔️ กลุ่ม ROV</span></div>
-        <div class="works-grid" id="rovWorksGrid"></div>
-        <button class="add-work-btn" onclick="addWorkCard('rovWorksGrid','rov')">＋ เพิ่มตัวอย่างงาน</button>
-      </div>
-      <div id="tab-idv" class="tab-panel">
-        <div class="group-header"><span class="group-badge">🎭 กลุ่ม Identity V</span></div>
-        <div class="works-grid" id="idvWorksGrid"></div>
-        <button class="add-work-btn" onclick="addWorkCard('idvWorksGrid','idv')">＋ เพิ่มตัวอย่างงาน</button>
-      </div>
-      <div id="tab-form" class="tab-panel">
-        <div class="group-header"><span class="group-badge">📋 กลุ่มฟอร์ม</span></div>
-        <div class="works-grid" id="formWorksGrid"></div>
-        <button class="add-work-btn" onclick="addWorkCard('formWorksGrid','form')">＋ เพิ่มตัวอย่างงาน</button>
-      </div>
-      <div id="tab-course" class="tab-panel">
-        <div class="group-header"><span class="group-badge">📚 คอร์สสอนทำเว็บ</span></div>
-        <div class="works-grid" id="courseWorksGrid"></div>
-        <button class="add-work-btn" onclick="addWorkCard('courseWorksGrid','course')">＋ เพิ่มตัวอย่างงาน</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-card" id="howto">
-    <div class="glass-panel section-inner">
-      <div class="section-header"><h2>📝 วิธีสั่งซื้อ</h2></div>
-      <div class="step"><div class="step-num">1</div><div class="step-text">ทัก FB หรือ Line เพื่อสอบถามคิวงาน</div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-text">ส่งข้อมูล รูปแบบ โทนสี ที่ต้องการ</div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-text">ชำระเงินเพื่อยืนยันคิวงาน</div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-text">รอรับความน่ารักได้เลยภายใน 4-8 ชม. 🌸</div></div>
-    </div>
-  </div>
-
-  <div class="section-card" id="faq">
-    <div class="glass-panel section-inner">
-      <div class="section-header"><h2>❓ FAQ</h2></div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">จ่ายเงินช่องทางไหนได้บ้าง? <span>+</span></div>
-        <div class="faq-a">รับโอนผ่านธนาคาร และ PromptPay จ้า</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">มีเทมเพลตให้เลือกไหม? <span>+</span></div>
-        <div class="faq-a">มีให้เลือกเยอะเลยค่ะ ทักมาขอดูได้น้า 🎀</div>
-      </div>
-    </div>
-  </div>
-
-</div><footer>
-  <div class="footer-title">✿ Contact Me ✿</div>
-  <div class="footer-socials">
-    <a class="footer-icon" href="https://www.facebook.com/share/1De6NiueGU/?mibextid=wwXIfr" target="_blank" style="color:#1877f2;">📘</a>
-    <a class="footer-icon" href="https://line.me/ti/p/xnh050s5VP" target="_blank" style="color:#06c755;">💬</a>
-  </div>
-  <div class="footer-copy">design. @NONIOAEY 🌸</div>
-</footer>
-
-<div class="modal-overlay" id="previewModal">
+</div> <div class="modal-overlay" id="previewModal">
   <div class="modal-box">
-    <button class="modal-close-icon" onclick="closeModal('previewModal')">✕</button>
-    <div class="modal-title">✿ ดูตัวอย่างงาน ✿</div>
+    <button class="modal-close" onclick="closeModal('previewModal')">✕</button>
+    <div style="font-family:'Itim'; font-size:18px; color:var(--pink-text);">✿ ดูตัวอย่างงาน ✿</div>
     <div class="modal-link-box" id="modalLinkDisplay">—</div>
     <div class="modal-btns">
-      <button class="glossy-btn btn-copy" onclick="copyLink()">คัดลอก</button>
-      <button class="glossy-btn" onclick="goLink()">เปิดลิงก์ 🚀</button>
+      <button class="cute-btn" style="background:var(--white); color:var(--pink-text); border:1px solid var(--pink-main);" onclick="copyLink()">คัดลอก</button>
+      <button class="cute-btn" onclick="goLink()">เปิดลิงก์ 🚀</button>
     </div>
   </div>
 </div>
@@ -517,20 +457,6 @@
 </div>
 
 <script>
-// ===== BG FLOATIES =====
-const emojis = ['🌸','✨','🎀','☁️','🤍','💖'];
-const fc = document.getElementById('floaties');
-for(let i=0; i<15; i++){
-  let el = document.createElement('div');
-  el.className = 'floatie';
-  el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-  el.style.left = Math.random()*100+'%';
-  el.style.animationDuration = (10+Math.random()*15)+'s';
-  el.style.animationDelay = (Math.random()*10)+'s';
-  el.style.fontSize = (16+Math.random()*14)+'px';
-  fc.appendChild(el);
-}
-
 // ===== AVATAR UPLOAD =====
 document.getElementById('avatarInput').addEventListener('change', function(e){
   const file = e.target.files[0];
@@ -545,17 +471,16 @@ document.getElementById('avatarInput').addEventListener('change', function(e){
   reader.readAsDataURL(file);
 });
 
-// ===== ADD WORK CARD =====
-let cardCounters = {};
-function addWorkCard(gridId, type) {
-  if(!cardCounters[gridId]) cardCounters[gridId] = 0;
-  const idx = cardCounters[gridId]++;
+// ===== ADD WORK CARD (WEB & PORTFOLIO) =====
+let cardCount = 0;
+function addWorkCard(gridId) {
   const grid = document.getElementById(gridId);
+  const idx = cardCount++;
   
-  const fileId = `file_${gridId}_${idx}`;
-  const titleId = `title_${gridId}_${idx}`;
-  const linkId = `link_${gridId}_${idx}`;
-  const imgId = `img_${gridId}_${idx}`;
+  const fileId = `file_${idx}`;
+  const imgId = `img_${idx}`;
+  const titleId = `title_${idx}`;
+  const linkId = `link_${idx}`;
 
   const card = document.createElement('div');
   card.className = 'work-card';
@@ -563,30 +488,24 @@ function addWorkCard(gridId, type) {
     <div class="work-img-wrap" onclick="document.getElementById('${fileId}').click()">
       <div class="work-img-placeholder" id="ph_${imgId}"><span>🖼️</span>ใส่รูปภาพ</div>
       <img id="${imgId}" src="" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
-      <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="loadWorkImg('${fileId}','${imgId}','ph_${imgId}')">
+      <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="loadImg('${fileId}','${imgId}','ph_${imgId}')">
     </div>
     <div class="work-info">
-      <input class="work-title-input" id="${titleId}" placeholder="พิมพ์ชื่องาน..." type="text">
-      <input class="work-link-input" id="${linkId}" placeholder="วางลิงก์ที่นี่..." type="url" style="display:block; border:none; border-radius:12px; padding:8px 10px; font-size:12px; background:rgba(255,255,255,0.7); box-shadow:inset 0 1px 3px rgba(0,0,0,0.05);">
-      <button class="glossy-btn btn-preview" onclick="openPreview('${linkId}')">ดูตัวอย่าง</button>
+      <input class="work-input" id="${titleId}" placeholder="หัวข้อชื่องาน..." type="text">
+      <input class="work-input" id="${linkId}" placeholder="วางลิงก์ที่นี่..." type="url" style="display:none;">
+      <button class="cute-btn" onclick="openPreview('${linkId}')">ดูตัวอย่าง</button>
+      <button class="cute-btn" style="background:var(--pink-bg); color:var(--text-light); margin-top:4px;" onclick="toggleLinkInput('${linkId}')">✎ ใส่ลิงก์</button>
     </div>
   `;
   grid.appendChild(card);
 }
 
-function loadWorkImg(fileId, imgId, phId) {
-  const file = document.getElementById(fileId).files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    document.getElementById(imgId).src = ev.target.result;
-    document.getElementById(imgId).style.display = 'block';
-    document.getElementById(phId).style.display = 'none';
-  };
-  reader.readAsDataURL(file);
+function toggleLinkInput(linkId) {
+  const el = document.getElementById(linkId);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
-// ===== ID CARD GALLERY =====
+// ===== ADD ID CARD (IMAGE ONLY) =====
 let idCount = 0;
 function addIdCard() {
   const grid = document.getElementById('idWorksGrid');
@@ -595,11 +514,11 @@ function addIdCard() {
   const imgId = `idimg_${idx}`;
 
   const wrap = document.createElement('div');
-  wrap.className = 'id-work-img-wrap';
+  wrap.className = 'id-img-wrap';
   wrap.innerHTML = `
-    <div style="font-size:24px; opacity:0.5;" id="idph_${idx}" onclick="document.getElementById('${fileId}').click()">➕</div>
+    <div style="font-size:24px; color:var(--border-color);" id="idph_${idx}" onclick="document.getElementById('${fileId}').click()">➕</div>
     <img id="${imgId}" src="" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
-    <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="loadIdImg('${fileId}','${imgId}','idph_${idx}')">
+    <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="loadImg('${fileId}','${imgId}','idph_${idx}')">
   `;
   wrap.addEventListener('click', function(){
     const img = document.getElementById(imgId);
@@ -608,35 +527,37 @@ function addIdCard() {
   grid.appendChild(wrap);
 }
 
-function loadIdImg(fileId, imgId, phId) {
+// ===== COMMON IMAGE LOADER =====
+function loadImg(fileId, imgId, phId) {
   const file = document.getElementById(fileId).files[0];
   if(!file) return;
   const reader = new FileReader();
   reader.onload = (ev) => {
     document.getElementById(imgId).src = ev.target.result;
     document.getElementById(imgId).style.display = 'block';
-    document.getElementById(phId).style.display = 'none';
+    if(document.getElementById(phId)) document.getElementById(phId).style.display = 'none';
   };
   reader.readAsDataURL(file);
 }
 
-// ===== MODALS & LOGIC =====
+// ===== MODALS LOGIC =====
 let currentLink = '';
 function openPreview(linkId) {
-  currentLink = document.getElementById(linkId).value.trim();
-  if(!currentLink) { alert('อย่าลืมใส่ลิงก์ก่อนนะคะ 🎀'); return; }
+  const input = document.getElementById(linkId);
+  currentLink = input ? input.value.trim() : '';
+  if(!currentLink) { alert('คุณยังไม่ได้ใส่ลิงก์เลยน้า 🎀 (กดปุ่ม ✎ ใส่ลิงก์ ก่อนนะคะ)'); return; }
   document.getElementById('modalLinkDisplay').textContent = currentLink;
   document.getElementById('previewModal').classList.add('show');
 }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
-function copyLink(){ navigator.clipboard.writeText(currentLink).then(()=>alert('คัดลอกลิงก์แล้ว 🌸')); }
+function copyLink(){ navigator.clipboard.writeText(currentLink).then(()=>alert('คัดลอกลิงก์เรียบร้อย 🌸')); }
 function goLink(){ window.open(currentLink,'_blank'); }
 function openImgModal(src){ document.getElementById('imgModalSrc').src = src; document.getElementById('imgModal').classList.add('show'); }
 
 // ===== TABS =====
 function switchTab(btn, panelId){
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.port-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.port-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(panelId).classList.add('active');
 }
@@ -646,6 +567,14 @@ function toggleFaq(el){
   el.parentElement.classList.toggle('open');
   el.querySelector('span').textContent = el.parentElement.classList.contains('open') ? '-' : '+';
 }
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('.nav-btn').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
 </script>
 </body>
 </html>
