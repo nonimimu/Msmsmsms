@@ -2,579 +2,1082 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>NONIOAEY ✿</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NONIOAEY ✿ สั่งทำเว็บ & ป้ายไอดี</title>
 <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Itim&display=swap" rel="stylesheet">
 <style>
+  /* =========================================================
+     [ 1. CSS VARIABLES ] - คุมโทนสีชมพูพาสเทลและคาวาอี้
+  ========================================================= */
   :root {
-    --pink-bg: #fff0f3;
+    --pink-bg: #fff5f7;
+    --pink-pastel: #ffe4e8;
     --pink-main: #ffb6c1;
-    --pink-dark: #e88fa1;
-    --pink-text: #d65a7a;
+    --pink-dark: #f48fb1;
+    --pink-text: #d81b60;
     --white: #ffffff;
-    --text-dark: #b85270;
-    --text-light: #d48298;
-    --border-color: #ffcdd2;
+    --cream: #fffcfd;
+    --text-main: #ad1457;
+    --text-muted: #f06292;
+    --border-dashed: #ffcdd2;
+    --shadow-soft: 0 10px 30px rgba(255, 182, 193, 0.35);
+    --shadow-inner: inset 0 2px 10px rgba(255, 182, 193, 0.2);
+    --radius-box: 28px;
+    --radius-small: 16px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+  /* =========================================================
+     [ 2. GLOBAL RESET & BASE STYLES ]
+  ========================================================= */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
 
   body {
     font-family: 'Mitr', sans-serif;
-    color: var(--text-dark);
+    color: var(--text-main);
     background-color: var(--pink-bg);
-    background-image: radial-gradient(var(--pink-main) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
+    /* พื้นหลังลายจุดและตารางพาสเทล */
+    background-image: 
+      radial-gradient(var(--pink-main) 1.5px, transparent 1.5px),
+      linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px);
+    background-size: 24px 24px, 48px 48px, 48px 48px;
+    background-position: 0 0, 0 0, 0 0;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  /* คอนเทนเนอร์หลัก (ทรงแอปมือถือ) */
-  .app-container {
-    max-width: 480px;
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--pink-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--pink-main); border-radius: 10px; }
+
+  /* =========================================================
+     [ 3. APP CONTAINER ] - กรอบมือถือตรงกลาง
+  ========================================================= */
+  .app-wrapper {
+    max-width: 500px;
     margin: 0 auto;
-    background-color: #fffcfd;
+    background-color: var(--cream);
     min-height: 100vh;
-    box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
+    box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
     position: relative;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
+    overflow: hidden;
   }
 
-  /* ===== HEADER & BANNER ===== */
+  /* =========================================================
+     [ 4. HEADER & BANNER ]
+  ========================================================= */
   .header-banner {
     width: 100%;
-    height: 140px;
-    background: linear-gradient(135deg, #ffd1dc, #ffe4e1);
+    height: 180px;
+    background: linear-gradient(135deg, #ffd1dc 0%, #ffe4e1 100%);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 3px dashed var(--white);
+  }
+  
+  /* ลายลูกไม้ (Lace Border) ตกแต่งแบนเนอร์ */
+  .header-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background-image: radial-gradient(circle at 15px 0, transparent 16px, var(--cream) 17px);
+    background-size: 30px 30px;
+    background-repeat: repeat-x;
+  }
+
+  .floating-flower {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.6;
+    animation: spin 10s linear infinite;
+  }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+
+  /* =========================================================
+     [ 5. PROFILE SECTION ]
+  ========================================================= */
+  .profile-section {
+    text-align: center;
+    margin-top: -65px;
+    position: relative;
+    z-index: 10;
+    padding: 0 24px;
+  }
+
+  .avatar-container {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 6px solid var(--white);
+    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.6);
+    margin: 0 auto 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .header-banner::after {
-    content: '✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿';
-    position: absolute;
-    bottom: -10px;
-    color: #fffcfd;
-    font-size: 28px;
-    letter-spacing: 4px;
-    white-space: nowrap;
-  }
-
-  /* ===== PROFILE ===== */
-  .profile-section {
-    text-align: center;
-    margin-top: -55px;
-    position: relative;
-    z-index: 10;
-    padding: 0 20px;
-  }
-  .profile-img-wrap {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 4px solid var(--white);
-    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.5);
-    margin: 0 auto 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 40px;
+    font-size: 50px;
     cursor: pointer;
     overflow: hidden;
     position: relative;
+    transition: var(--transition);
   }
-  .profile-img-wrap img { width:100%; height:100%; object-fit:cover; }
+  .avatar-container:hover { transform: scale(1.05); }
+  .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-hint {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    color: var(--pink-text);
+    font-size: 11px;
+    padding: 4px 0;
+    font-weight: 600;
+  }
+
   .profile-name {
     font-family: 'Itim', cursive;
-    font-size: 26px;
+    font-size: 32px;
     color: var(--pink-text);
-    margin-bottom: 4px;
+    text-shadow: 2px 2px 0px var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
   }
-  .profile-bio {
-    font-size: 13px;
-    color: var(--text-light);
+
+  .profile-slogan {
+    font-size: 14px;
+    color: var(--text-main);
     background: var(--white);
     display: inline-block;
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1.5px dashed var(--pink-main);
-    margin-bottom: 16px;
+    padding: 6px 20px;
+    border-radius: 30px;
+    border: 2px dashed var(--pink-main);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-inner);
   }
-  .social-links {
-    display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
+
+  /* Social Buttons */
+  .social-grid {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 24px;
   }
   .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     background: var(--white);
-    border: 2px solid var(--border-color);
-    padding: 8px 24px;
-    border-radius: 25px;
+    border: 2px solid var(--border-dashed);
+    padding: 10px 24px;
+    border-radius: 30px;
     font-size: 14px;
     color: var(--pink-text);
     text-decoration: none;
     font-weight: 500;
-    transition: 0.2s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
   }
-  .social-btn:hover { background: var(--pink-bg); border-color: var(--pink-main); transform: translateY(-2px); }
+  .social-btn:hover {
+    background: var(--pink-bg);
+    border-color: var(--pink-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4);
+  }
 
-  /* ===== MENU TABS (MAIN NAV) ===== */
-  .main-nav {
-    display: flex; gap: 8px;
+  /* =========================================================
+     [ 6. STICKY NAVIGATION MENU ]
+  ========================================================= */
+  .sticky-nav {
+    display: flex;
+    gap: 10px;
     overflow-x: auto;
-    padding: 0 20px 20px;
+    padding: 10px 24px 20px;
     scrollbar-width: none;
     position: sticky;
-    top: 10px;
+    top: 0;
     z-index: 100;
+    background: rgba(255, 252, 253, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px dashed var(--border-dashed);
   }
-  .main-nav::-webkit-scrollbar { display: none; }
-  .nav-btn {
+  .sticky-nav::-webkit-scrollbar { display: none; }
+  .nav-link {
     background: var(--white);
-    border: 2px solid var(--border-color);
-    padding: 8px 16px;
+    border: 2px solid var(--border-dashed);
+    padding: 10px 20px;
     border-radius: 20px;
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'Mitr', sans-serif;
-    color: var(--text-light);
+    color: var(--text-muted);
     white-space: nowrap;
     text-decoration: none;
-    box-shadow: 0 2px 8px rgba(255,182,193,0.2);
+    transition: var(--transition);
   }
-  .nav-btn:hover { background: var(--pink-bg); color: var(--pink-text); border-color: var(--pink-main); }
+  .nav-link:hover, .nav-link.active {
+    background: var(--pink-main);
+    color: var(--white);
+    border-color: var(--pink-dark);
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+  }
 
-  /* ===== CUTE CONTENT BOX ===== */
-  .cute-box {
+  /* =========================================================
+     [ 7. CUTE SECTION BOXES (The Core Layout) ]
+  ========================================================= */
+  .cute-section {
     background: var(--white);
-    border: 2px solid var(--border-color);
-    border-radius: 24px;
-    margin: 0 20px 24px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
+    border: 2.5px solid var(--border-dashed);
+    border-radius: var(--radius-box);
+    margin: 0 24px 30px;
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
   }
-  .box-title {
+  /* เทปแปะมุมกล่อง */
+  .cute-section::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 80px;
+    height: 25px;
+    background: rgba(255, 182, 193, 0.4);
+    border-radius: 4px;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+  }
+
+  .section-title {
     font-family: 'Itim', cursive;
-    font-size: 20px;
+    font-size: 24px;
     color: var(--pink-text);
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  .section-title span { font-size: 20px; }
+
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    text-align: center;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--pink-bg);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--white);
+  }
+
+  /* =========================================================
+     [ 8. PRICE LIST STYLES ]
+  ========================================================= */
+  .price-category {
+    font-size: 15px;
+    color: var(--pink-text);
+    font-weight: 600;
+    margin: 20px 0 10px;
+    display: flex;
+    align-items: center;
     gap: 8px;
   }
-  .box-title::before, .box-title::after { content: '🎀'; font-size: 16px; }
-
-  .desc-text {
-    font-size: 13px;
-    line-height: 1.6;
-    text-align: center;
-    color: var(--text-dark);
-    margin-bottom: 16px;
-    padding: 12px;
-    background: var(--pink-bg);
-    border-radius: 14px;
-  }
-
-  /* ===== PRICE LIST ===== */
-  .price-header { font-size: 14px; color: var(--pink-text); font-weight: 500; margin-bottom: 8px; margin-top: 12px; }
-  .price-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0;
-    border-bottom: 1.5px dashed var(--border-color);
-    font-size: 13px;
-  }
-  .price-item:last-child { border-bottom: none; }
-  .price-val { font-weight: 600; color: var(--pink-text); background: #fff0f3; border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 16px; }
   
-  .note-box {
-    background: #fffcfd;
-    border: 1.5px dashed var(--pink-main);
-    padding: 12px;
-    border-radius: 14px;
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 16px;
-    line-height: 1.6;
+  .price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--white);
+    border: 1.5px dashed var(--border-dashed);
+    border-radius: var(--radius-small);
+    font-size: 14px;
+    transition: var(--transition);
+  }
+  .price-row:hover { background: var(--pink-bg); transform: scale(1.02); }
+  
+  .price-name { color: var(--text-main); }
+  .price-tag {
+    font-weight: 600;
+    color: var(--pink-text);
+    background: #ffe4e8;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--pink-main);
   }
 
-  /* ===== GALLERY (WORKS) ===== */
-  .works-label { font-size: 14px; font-weight: 600; color: var(--pink-text); margin: 20px 0 12px; text-align: center; }
-  .works-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .condition-box {
+    background: var(--pink-bg);
+    border: 1.5px solid var(--pink-main);
+    padding: 16px;
+    border-radius: var(--radius-small);
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 20px;
+    line-height: 1.8;
+  }
+
+  /* =========================================================
+     [ 9. GALLERY & WORK CARDS ]
+  ========================================================= */
+  .gallery-header {
+    text-align: center;
+    margin: 30px 0 16px;
+    position: relative;
+  }
+  .gallery-header span {
+    background: var(--white);
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--pink-text);
+    position: relative;
+    z-index: 2;
+  }
+  .gallery-header::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; width: 100%; height: 2px;
+    background: var(--border-dashed);
+    z-index: 1;
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* รูปแบบการ์ดผลงานเว็บ / ลิงก์ */
   .work-card {
     background: var(--white);
-    border: 2px solid var(--border-color);
-    border-radius: 16px;
+    border: 2px solid var(--border-dashed);
+    border-radius: var(--radius-small);
     overflow: hidden;
-    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: var(--transition);
   }
-  .work-img-wrap {
-    width: 100%; aspect-ratio: 1/1;
-    background: var(--pink-bg);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; position: relative;
-  }
-  .work-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; color: var(--text-light); }
-  .work-img-placeholder span { font-size: 24px; }
-  .work-info { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
-  .work-input {
-    width: 100%; border: 1px solid var(--border-color); border-radius: 10px; padding: 6px 8px;
-    font-size: 12px; font-family: 'Mitr'; color: var(--text-dark); outline: none;
-  }
-  .work-input:focus { border-color: var(--pink-main); }
-  .cute-btn {
-    width: 100%; background: var(--pink-main); color: var(--white);
-    border: none; border-radius: 10px; padding: 6px 0;
-    font-family: 'Mitr', sans-serif; font-size: 12px; cursor: pointer; transition: 0.2s;
-  }
-  .cute-btn:hover { background: var(--pink-dark); }
+  .work-card:hover { border-color: var(--pink-main); box-shadow: var(--shadow-soft); }
 
-  /* ===== ID CARD GRID (3 Columns) ===== */
-  .id-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .id-img-wrap {
-    aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; cursor: pointer;
-    background: var(--pink-bg); border: 2px solid var(--border-color);
-    display: flex; align-items: center; justify-content: center; position: relative;
-  }
-
-  /* ===== ADD BUTTON ===== */
-  .add-btn-dashed {
-    background: transparent;
-    border: 2px dashed var(--pink-main);
-    color: var(--pink-text);
+  .work-img-box {
     width: 100%;
-    padding: 14px;
-    border-radius: 16px;
+    aspect-ratio: 1/1;
+    background: var(--pink-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 2px solid var(--border-dashed);
+  }
+  .work-img-box img {
+    width: 100%; height: 100%; object-fit: cover;
+    position: absolute; top: 0; left: 0; display: none;
+  }
+  .img-placeholder {
+    font-size: 13px; color: var(--text-muted);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .img-placeholder i { font-size: 32px; font-style: normal; }
+
+  .work-details {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .work-input {
+    width: 100%;
+    border: 1.5px solid var(--border-dashed);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-family: 'Mitr', sans-serif;
+    color: var(--text-main);
+    background: var(--white);
+    outline: none;
+    transition: 0.2s;
+  }
+  .work-input:focus { border-color: var(--pink-text); background: var(--pink-bg); }
+  
+  .btn-cute {
+    width: 100%;
+    background: var(--pink-main);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 0;
     font-family: 'Mitr', sans-serif;
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    margin-top: 14px;
+    transition: var(--transition);
+  }
+  .btn-cute:hover { background: var(--pink-dark); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-dashed);
+    margin-top: 4px;
+  }
+  .btn-outline:hover { background: var(--pink-bg); color: var(--pink-text); }
+
+  /* รูปแบบการ์ดป้ายไอดี (เน้นรูป) */
+  .id-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .id-card {
+    aspect-ratio: 1/1;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--pink-bg);
+    border: 2px solid var(--border-dashed);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    transition: var(--transition);
+  }
+  .id-card:hover { transform: scale(1.05); border-color: var(--pink-main); }
+  .id-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; display: none; }
+
+  /* ปุ่มเพิ่มงาน */
+  .btn-add-large {
+    width: 100%;
+    background: transparent;
+    border: 2.5px dashed var(--pink-main);
+    color: var(--pink-text);
+    padding: 16px;
+    border-radius: var(--radius-small);
+    font-family: 'Mitr', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: var(--transition);
+  }
+  .btn-add-large:hover { background: var(--pink-pastel); transform: translateY(-2px); }
+
+  /* =========================================================
+     [ 10. PORTFOLIO TABS SYSTEM ]
+  ========================================================= */
+  .portfolio-nav {
+    display: flex; gap: 10px;
+    overflow-x: auto;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .portfolio-nav::-webkit-scrollbar { display: none; }
+  .port-tab {
+    background: var(--white);
+    border: 2px solid var(--border-dashed);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: 'Mitr', sans-serif;
+    color: var(--text-muted);
+    white-space: nowrap;
+    cursor: pointer;
     transition: 0.2s;
   }
-  .add-btn-dashed:hover { background: var(--pink-bg); }
-
-  /* ===== PORTFOLIO TABS ===== */
-  .port-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; scrollbar-width: none; }
-  .port-tabs::-webkit-scrollbar { display: none; }
-  .port-tab-btn {
-    background: var(--white); border: 2px solid var(--border-color); padding: 6px 14px;
-    border-radius: 20px; font-size: 12px; font-family: 'Mitr'; color: var(--text-light);
-    white-space: nowrap; cursor: pointer;
+  .port-tab.active {
+    background: var(--pink-text);
+    color: var(--white);
+    border-color: var(--pink-text);
+    box-shadow: 0 4px 10px rgba(216, 27, 96, 0.3);
   }
-  .port-tab-btn.active { background: var(--pink-main); color: var(--white); border-color: var(--pink-main); }
-  .port-panel { display: none; animation: fadeIn 0.3s; }
-  .port-panel.active { display: block; }
-  @keyframes fadeIn { from{opacity:0; transform:translateY(5px);} to{opacity:1; transform:translateY(0);} }
-  .group-badge { display: inline-block; background: var(--pink-bg); color: var(--pink-text); padding: 4px 14px; border-radius: 16px; font-size: 13px; font-weight: 500; margin-bottom: 12px; border: 1px solid var(--border-color); }
 
-  /* ===== FAQ & STEPS ===== */
-  .faq-item { border: 2px solid var(--border-color); border-radius: 16px; margin-bottom: 10px; overflow: hidden; }
-  .faq-q { padding: 12px 16px; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; background: var(--pink-bg); color: var(--pink-text); }
-  .faq-a { padding: 0 16px; font-size: 12px; color: var(--text-dark); max-height: 0; overflow: hidden; transition: 0.3s; background: var(--white); }
-  .faq-item.open .faq-a { max-height: 150px; padding: 12px 16px; border-top: 1px dashed var(--border-color); }
+  .port-content { display: none; animation: fadeUp 0.4s ease; }
+  .port-content.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-  .step-row { display: flex; align-items: center; gap: 12px; background: var(--white); border: 2px solid var(--border-color); border-radius: 16px; padding: 12px; margin-bottom: 10px; }
-  .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--pink-main); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; flex-shrink: 0; }
-  .step-text { font-size: 13px; color: var(--text-dark); }
+  .tab-badge {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--pink-bg); color: var(--pink-text);
+    padding: 6px 20px; border-radius: 20px; font-size: 14px; font-weight: 500;
+    margin: 0 auto 20px; border: 1px solid var(--pink-main); width: 100%;
+  }
 
-  /* ===== FOOTER ===== */
-  footer { text-align: center; padding: 20px; margin-top: 20px; }
-  .footer-copy { font-size: 12px; color: var(--text-light); margin-top: 10px; }
+  /* =========================================================
+     [ 11. HOW TO ORDER & FAQ ]
+  ========================================================= */
+  .step-container { display: flex; flex-direction: column; gap: 12px; }
+  .step-box {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--white); border: 2px solid var(--border-dashed);
+    border-radius: var(--radius-small); padding: 16px;
+  }
+  .step-number {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--pink-main); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 600; flex-shrink: 0;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1);
+  }
+  .step-text { font-size: 14px; color: var(--text-main); line-height: 1.5; }
 
-  /* ===== MODALS ===== */
-  .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,182,193,0.5); backdrop-filter: blur(4px); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
-  .modal-overlay.show { display: flex; }
-  .modal-box { background: var(--white); border: 2px solid var(--border-color); border-radius: 24px; padding: 24px; width: 100%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(255,182,193,0.4); position: relative; }
-  .modal-close { position: absolute; top: 12px; right: 16px; font-size: 20px; color: var(--text-light); cursor: pointer; background: none; border: none; }
-  .modal-link-box { background: var(--pink-bg); border-radius: 12px; padding: 12px; font-size: 12px; color: var(--text-dark); margin: 16px 0; border: 1px dashed var(--pink-main); word-break: break-all; }
-  .modal-btns { display: flex; gap: 10px; justify-content: center; }
+  .faq-container { display: flex; flex-direction: column; gap: 12px; }
+  .faq-box {
+    border: 2px solid var(--border-dashed);
+    border-radius: var(--radius-small);
+    overflow: hidden; background: var(--white);
+  }
+  .faq-question {
+    padding: 16px; font-size: 14px; font-weight: 500;
+    background: var(--pink-bg); color: var(--pink-text);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-icon { transition: transform 0.3s; font-size: 18px; }
+  .faq-answer {
+    padding: 0 16px; font-size: 13px; color: var(--text-main);
+    max-height: 0; overflow: hidden; transition: all 0.4s ease;
+    line-height: 1.7;
+  }
+  .faq-box.open .faq-answer { max-height: 200px; padding: 16px; border-top: 1px dashed var(--border-dashed); }
+  .faq-box.open .faq-icon { transform: rotate(45deg); }
+
+  /* =========================================================
+     [ 12. FOOTER ]
+  ========================================================= */
+  .app-footer {
+    text-align: center; padding: 30px 20px;
+    background: linear-gradient(to bottom, transparent, var(--pink-pastel));
+  }
+  .footer-text { font-family: 'Itim', cursive; font-size: 16px; color: var(--pink-text); letter-spacing: 1px; }
+
+  /* =========================================================
+     [ 13. MODALS & TOASTS (Popups) ]
+  ========================================================= */
+  .modal-bg {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 182, 193, 0.4); backdrop-filter: blur(5px);
+    z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-bg.active { display: flex; }
   
-  .img-modal-box { max-width: 360px; width: 100%; border-radius: 20px; overflow: hidden; border: 4px solid var(--white); box-shadow: 0 10px 30px rgba(255,182,193,0.6); position: relative; }
-  .img-modal-box img { width: 100%; display: block; }
-  .img-close-btn { position: absolute; top: 10px; right: 10px; background: var(--white); border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 16px; cursor: pointer; color: var(--pink-text); }
+  .modal-content {
+    background: var(--white); border: 3px solid var(--border-dashed);
+    border-radius: var(--radius-box); padding: 30px 24px;
+    width: 100%; max-width: 340px; text-align: center;
+    box-shadow: 0 20px 40px rgba(216, 27, 96, 0.2);
+    position: relative; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  
+  .btn-close-modal {
+    position: absolute; top: 12px; right: 16px; font-size: 24px;
+    color: var(--text-muted); background: none; border: none; cursor: pointer;
+  }
+  .modal-title { font-family: 'Itim'; font-size: 22px; color: var(--pink-text); margin-bottom: 16px; }
+  .modal-link-display {
+    background: var(--pink-bg); border: 1.5px dashed var(--pink-main);
+    border-radius: 12px; padding: 16px; font-size: 13px; color: var(--text-main);
+    margin-bottom: 24px; word-break: break-all;
+  }
+  .modal-actions { display: flex; gap: 12px; }
+
+  /* Image Expand Modal */
+  .img-modal-content {
+    max-width: 90%; max-height: 80vh; border-radius: 20px; overflow: hidden;
+    border: 4px solid var(--white); box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    position: relative; animation: popIn 0.3s;
+  }
+  .img-modal-content img { width: 100%; height: auto; display: block; max-height: 80vh; object-fit: contain; background: #fff;}
+  .btn-close-img {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--white); border: none; border-radius: 50%;
+    width: 36px; height: 36px; font-size: 20px; cursor: pointer;
+    color: var(--pink-text); box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+    background: var(--pink-text); color: var(--white);
+    padding: 12px 24px; border-radius: 30px; font-size: 14px; font-weight: 500;
+    box-shadow: 0 10px 20px rgba(216, 27, 96, 0.3); z-index: 2000;
+    transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .toast.show { bottom: 40px; }
 </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="app-wrapper">
 
-  <div class="header-banner"></div>
+  <header class="header-banner">
+    <div class="floating-flower" style="top: 20px; left: 20px;">🌸</div>
+    <div class="floating-flower" style="top: 40px; right: 30px; animation-duration: 15s;">✨</div>
+    <div class="floating-flower" style="bottom: 40px; left: 50px; animation-duration: 8s;">🎀</div>
+  </header>
 
-  <div class="profile-section">
-    <div class="profile-img-wrap" onclick="document.getElementById('avatarInput').click()" title="กดเพื่อเปลี่ยนรูป">
-      <span id="avatarIcon">🌸</span>
-      <img id="avatarImg" src="" style="display:none; position:absolute;top:0;left:0;">
+  <section class="profile-section">
+    <div class="avatar-container" onclick="triggerUpload('avatarInput')" title="เปลี่ยนรูปโปรไฟล์">
+      <span id="avatarIcon">🎀</span>
+      <img id="avatarImg" src="" alt="Profile">
+      <div class="avatar-hint">อัปโหลดรูป</div>
+      <input type="file" id="avatarInput" accept="image/*" style="display:none;" onchange="previewImage(this, 'avatarImg', 'avatarIcon')">
     </div>
-    <input type="file" id="avatarInput" accept="image/*" style="display:none;">
     
-    <div class="profile-name">NONIOAEY</div>
-    <div class="profile-bio">รับทำป้ายขายไอดี · ทำเว็บร้าน · เช่ารหัส</div>
+    <h1 class="profile-name">NONIOAEY</h1>
+    <div class="profile-slogan">รับทำป้ายขายไอดี · ทำเว็บร้าน · เช่ารหัส</div>
     
-    <div class="social-links">
-      <a href="https://www.facebook.com/share/1De6NiueGU/?mibextid=wwXIfr" target="_blank" class="social-btn">📘 Facebook</a>
-      <a href="https://line.me/ti/p/xnh050s5VP" target="_blank" class="social-btn">💬 Line</a>
+    <div class="social-grid">
+      <a href="https://www.facebook.com/share/1De6NiueGU/?mibextid=wwXIfr" target="_blank" class="social-btn">
+        <span style="font-size:18px;">📘</span> Facebook
+      </a>
+      <a href="https://line.me/ti/p/xnh050s5VP" target="_blank" class="social-btn">
+        <span style="font-size:18px;">💬</span> Line
+      </a>
     </div>
-  </div>
+  </section>
 
-  <div class="main-nav">
-    <a href="#web" class="nav-btn">🌐 งานเว็บ</a>
-    <a href="#idcard" class="nav-btn">🎴 ป้ายไอดี</a>
-    <a href="#portfolio" class="nav-btn">✨ ผลงาน</a>
-    <a href="#faq" class="nav-btn">❓ FAQ</a>
-    <a href="#howto" class="nav-btn">📝 วิธีสั่งซื้อ</a>
-  </div>
+  <nav class="sticky-nav">
+    <a href="#section-web" class="nav-link active">🌐 งานเว็บ</a>
+    <a href="#section-id" class="nav-link">🎴 ป้ายไอดี</a>
+    <a href="#section-port" class="nav-link">✨ ผลงาน</a>
+    <a href="#section-order" class="nav-link">📝 วิธีสั่งซื้อ</a>
+    <a href="#section-faq" class="nav-link">❓ FAQ</a>
+  </nav>
 
-  <div class="cute-box" id="web">
-    <div class="box-title">งานเว็บ</div>
-    <div class="desc-text">รับทำเว็บไซต์ลิงก์ร้าน มีทั้งเทมเพลตให้เลือกและงานสั่งทำพิเศษ สามารถสอบถามได้ราคาเริ่มต้นที่ 69 บาท</div>
+  <section id="section-web" class="cute-section">
+    <h2 class="section-title"><span>🌸</span> งานเว็บ <span>🌸</span></h2>
+    <div class="section-desc">รับทำเว็บไซต์ลิงก์ร้าน มีทั้งเทมเพลตให้เลือกและงานสั่งทำพิเศษ สามารถสอบถามได้ ราคาเริ่มต้นที่ 69 บาท</div>
     
-    <div class="price-header">✦ เรทราคาเว็บ</div>
-    <div class="price-item"><span>เว็บโอนเงิน</span><span class="price-val">69.-</span></div>
-    <div class="price-item"><span>เว็บตัวอย่างผลงาน</span><span class="price-val">109.-</span></div>
-    <div class="price-item"><span>เว็บรายละเอียดต่างๆ</span><span class="price-val">159.-</span></div>
-    <div class="price-item"><span>ตัวอย่างผลงาน + รายละเอียด</span><span class="price-val">209.-</span></div>
-    <div class="price-item"><span>เว็บอื่นๆ</span><span class="price-val">สอบถาม</span></div>
-
-    <div class="note-box">
-      🎀 แก้ฟรี 1 ครั้งก่อนส่งลิงก์ หลังส่งลิงก์แก้จุดละ 5 บาท<br>
-      🖼️ รูปที่ 1 - 3 ใส่ฟรี เพิ่มรูป รูปละ 10 บาท<br>
-      ⏳ รองาน 4 - 8 ชั่วโมง หากคิวเยอะจะแจ้งก่อน
+    <div class="price-category">✦ เรทราคาเว็บ</div>
+    <div class="price-list">
+      <div class="price-row"><span class="price-name">เว็บโอนเงิน</span><span class="price-tag">69.-</span></div>
+      <div class="price-row"><span class="price-name">เว็บตัวอย่างผลงาน</span><span class="price-tag">109.-</span></div>
+      <div class="price-row"><span class="price-name">เว็บรายละเอียดต่างๆ</span><span class="price-tag">159.-</span></div>
+      <div class="price-row"><span class="price-name">ตัวอย่างผลงาน + รายละเอียด</span><span class="price-tag">209.-</span></div>
+      <div class="price-row"><span class="price-name">เว็บอื่นๆ</span><span class="price-tag">ส่งแบบประเมินราคา</span></div>
     </div>
 
-    <div class="works-label">✿ ตัวอย่างงานเว็บ ✿</div>
-    <div class="works-grid" id="webWorksGrid"></div>
-    <button class="add-btn-dashed" onclick="addWorkCard('webWorksGrid')">＋ เพิ่มรูปตัวอย่างงาน</button>
-  </div>
+    <div class="condition-box">
+      🎀 <b>ราคาบวกเพิ่ม:</b><br>
+      • แก้ฟรี 1 ครั้งก่อนส่งลิงก์ (หลังส่งลิงก์แก้จุดละ 5 บาท)<br>
+      • รูปที่ 1 - 3 ใส่ฟรี (เพิ่มรูป รูปละ 10 บาท)<br>
+      • รองาน 4 - 8 ชั่วโมง หากคิวเยอะจะแจ้งก่อนนะคะ
+    </div>
 
-  <div class="cute-box" id="idcard">
-    <div class="box-title">ป้ายไอดี</div>
-    <div class="desc-text">รับทำป้ายขายไอดี สวยงามน่ารัก น่าใช้งานสุดๆ</div>
+    <div class="gallery-header"><span>ตัวอย่างงานเว็บ</span></div>
+    <div class="works-grid" id="grid-web">
+      <div class="work-card">
+        <div class="work-img-box" onclick="triggerUpload('file_web_0')">
+          <div class="img-placeholder" id="ph_web_0"><i>🖼️</i>อัปโหลดรูป</div>
+          <img id="img_web_0" src="">
+          <input type="file" id="file_web_0" accept="image/*" style="display:none" onchange="previewImage(this, 'img_web_0', 'ph_web_0')">
+        </div>
+        <div class="work-details">
+          <input type="text" class="work-input" placeholder="ตั้งชื่องาน...">
+          <input type="url" class="work-input link-input" id="link_web_0" placeholder="วางลิงก์เว็บ..." style="display:none;">
+          <button class="btn-cute" onclick="openLinkModal('link_web_0')">ดูตัวอย่าง 🔍</button>
+          <button class="btn-cute btn-outline" onclick="toggleDisplay('link_web_0')">✎ จัดการลิงก์</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn-add-large" onclick="createWorkCard('grid-web')">＋ เพิ่มตัวอย่างงานเว็บ</button>
+  </section>
+
+  <section id="section-id" class="cute-section">
+    <h2 class="section-title"><span>🎀</span> ป้ายไอดี <span>🎀</span></h2>
+    <div class="section-desc">รับทำป้ายขายไอดี ออกแบบสวยงาม อ่านง่าย ดึงดูดลูกค้าได้แน่นอนค่ะ</div>
     
-    <div class="price-header">✦ Skin Rate</div>
-    <div class="price-item"><span>1 - 100 สกิน</span><span class="price-val">สกินละ 0.50.-</span></div>
-    <div class="price-item"><span>100+ สกิน</span><span class="price-val">สกินละ 1.00.-</span></div>
-
-    <div class="price-header">✦ Others</div>
-    <div class="price-item"><span>หัวป้าย</span><span class="price-val">35.-</span></div>
-    <div class="price-item"><span>ป้ายไฟ</span><span class="price-val">2.- / ชิ้น</span></div>
-    <div class="price-item"><span>ประดับ</span><span class="price-val">0.50.- / ชิ้น</span></div>
-
-    <div class="note-box">
-      🎀 แก้ฟรี 1 ครั้งก่อนส่งงาน หลังส่งงานแก้จุดละ 5 บาท<br>
-      ⏳ รองาน 4 - 8 ชั่วโมง หากคิวเยอะจะแจ้งก่อน
+    <div class="price-category">✦ Skin Rate</div>
+    <div class="price-list">
+      <div class="price-row"><span class="price-name">1 - 100 สกิน</span><span class="price-tag">0.50 / สกิน</span></div>
+      <div class="price-row"><span class="price-name">100+ สกิน</span><span class="price-tag">1.00 / สกิน</span></div>
     </div>
 
-    <div class="works-label">✿ ตัวอย่างป้ายไอดี <span style="font-size:11px;font-weight:normal;color:var(--text-light);">(กดรูปเพื่อขยาย)</span> ✿</div>
-    <div class="id-grid" id="idWorksGrid"></div>
-    <button class="add-btn-dashed" onclick="addIdCard()">＋ เพิ่มรูปป้าย</button>
-  </div>
+    <div class="price-category">✦ Others</div>
+    <div class="price-list">
+      <div class="price-row"><span class="price-name">หัวป้าย</span><span class="price-tag">35.-</span></div>
+      <div class="price-row"><span class="price-name">ป้ายไฟ</span><span class="price-tag">2.- / ชิ้น</span></div>
+      <div class="price-row"><span class="price-name">ประดับตกแต่ง</span><span class="price-tag">0.50 / ชิ้น</span></div>
+    </div>
 
-  <div class="cute-box" id="portfolio">
-    <div class="box-title">กลุ่มผลงาน</div>
+    <div class="condition-box">
+      🎀 <b>เงื่อนไขการทำงาน:</b><br>
+      • แก้ฟรี 1 ครั้งก่อนส่งงาน (หลังส่งงานแก้จุดละ 5 บาท)<br>
+      • รองาน 4 - 8 ชั่วโมง หากคิวเยอะจะแจ้งก่อนนะคะ
+    </div>
+
+    <div class="gallery-header"><span>ตัวอย่างป้ายไอดี</span></div>
+    <p style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:12px;">(กดที่รูปภาพเพื่อขยายใหญ่)</p>
     
-    <div class="port-tabs">
-      <button class="port-tab-btn active" onclick="switchTab(this,'tab-block')">บล็อกป้าย</button>
-      <button class="port-tab-btn" onclick="switchTab(this,'tab-rov')">ROV</button>
-      <button class="port-tab-btn" onclick="switchTab(this,'tab-idv')">Identity V</button>
-      <button class="port-tab-btn" onclick="switchTab(this,'tab-form')">ฟอร์ม</button>
-      <button class="port-tab-btn" onclick="switchTab(this,'tab-course')">คอร์สสอน</button>
+    <div class="id-grid" id="grid-id">
+      <div class="id-card">
+        <div style="font-size:24px; color:var(--pink-main);" id="ph_id_0" onclick="triggerUpload('file_id_0')">➕</div>
+        <img id="img_id_0" src="" onclick="openImageModal(this.src)">
+        <input type="file" id="file_id_0" accept="image/*" style="display:none" onchange="previewImage(this, 'img_id_0', 'ph_id_0')">
+      </div>
+      <div class="id-card">
+        <div style="font-size:24px; color:var(--pink-main);" id="ph_id_1" onclick="triggerUpload('file_id_1')">➕</div>
+        <img id="img_id_1" src="" onclick="openImageModal(this.src)">
+        <input type="file" id="file_id_1" accept="image/*" style="display:none" onchange="previewImage(this, 'img_id_1', 'ph_id_1')">
+      </div>
+      <div class="id-card">
+        <div style="font-size:24px; color:var(--pink-main);" id="ph_id_2" onclick="triggerUpload('file_id_2')">➕</div>
+        <img id="img_id_2" src="" onclick="openImageModal(this.src)">
+        <input type="file" id="file_id_2" accept="image/*" style="display:none" onchange="previewImage(this, 'img_id_2', 'ph_id_2')">
+      </div>
+    </div>
+    <button class="btn-add-large" onclick="createIdCard('grid-id')">＋ เพิ่มรูปป้ายไอดี</button>
+  </section>
+
+  <section id="section-port" class="cute-section">
+    <h2 class="section-title"><span>✨</span> กลุ่มผลงาน <span>✨</span></h2>
+    
+    <div class="portfolio-nav">
+      <button class="port-tab active" onclick="switchPortfolioTab(this, 'tab-block')">บล็อกป้าย</button>
+      <button class="port-tab" onclick="switchPortfolioTab(this, 'tab-rov')">ROV</button>
+      <button class="port-tab" onclick="switchPortfolioTab(this, 'tab-idv')">Identity V</button>
+      <button class="port-tab" onclick="switchPortfolioTab(this, 'tab-form')">ฟอร์ม</button>
+      <button class="port-tab" onclick="switchPortfolioTab(this, 'tab-course')">คอร์สสอน</button>
     </div>
 
-    <div id="tab-block" class="port-panel active">
-      <div style="text-align:center;"><span class="group-badge">🎀 บล็อกป้ายเเละของตกเเต่ง</span></div>
-      <div class="works-grid" id="blockWorksGrid"></div>
-      <button class="add-btn-dashed" onclick="addWorkCard('blockWorksGrid')">＋ เพิ่มผลงาน</button>
+    <div id="tab-block" class="port-content active">
+      <div class="tab-badge">🎀 กลุ่มบล็อกป้ายเเละของตกเเต่ง</div>
+      <div class="works-grid" id="grid-block"></div>
+      <button class="btn-add-large" onclick="createWorkCard('grid-block')">＋ เพิ่มผลงานบล็อกป้าย</button>
     </div>
 
-    <div id="tab-rov" class="port-panel">
-      <div style="text-align:center;"><span class="group-badge">⚔️ กลุ่ม ROV</span></div>
-      <div class="works-grid" id="rovWorksGrid"></div>
-      <button class="add-btn-dashed" onclick="addWorkCard('rovWorksGrid')">＋ เพิ่มผลงาน</button>
+    <div id="tab-rov" class="port-content">
+      <div class="tab-badge">⚔️ กลุ่มตัวอย่างงาน ROV</div>
+      <div class="works-grid" id="grid-rov"></div>
+      <button class="btn-add-large" onclick="createWorkCard('grid-rov')">＋ เพิ่มผลงาน ROV</button>
     </div>
 
-    <div id="tab-idv" class="port-panel">
-      <div style="text-align:center;"><span class="group-badge">🎭 กลุ่ม Identity V</span></div>
-      <div class="works-grid" id="idvWorksGrid"></div>
-      <button class="add-btn-dashed" onclick="addWorkCard('idvWorksGrid')">＋ เพิ่มผลงาน</button>
+    <div id="tab-idv" class="port-content">
+      <div class="tab-badge">🎭 กลุ่มตัวอย่างงาน Identity V</div>
+      <div class="works-grid" id="grid-idv"></div>
+      <button class="btn-add-large" onclick="createWorkCard('grid-idv')">＋ เพิ่มผลงาน IDV</button>
     </div>
 
-    <div id="tab-form" class="port-panel">
-      <div style="text-align:center;"><span class="group-badge">📋 กลุ่มฟอร์ม</span></div>
-      <div class="works-grid" id="formWorksGrid"></div>
-      <button class="add-btn-dashed" onclick="addWorkCard('formWorksGrid')">＋ เพิ่มผลงาน</button>
+    <div id="tab-form" class="port-content">
+      <div class="tab-badge">📋 กลุ่มตัวอย่างงานฟอร์ม</div>
+      <div class="works-grid" id="grid-form"></div>
+      <button class="btn-add-large" onclick="createWorkCard('grid-form')">＋ เพิ่มผลงานฟอร์ม</button>
     </div>
 
-    <div id="tab-course" class="port-panel">
-      <div style="text-align:center;"><span class="group-badge">📚 กลุ่มคอร์สสอนทำเว็บ</span></div>
-      <div class="works-grid" id="courseWorksGrid"></div>
-      <button class="add-btn-dashed" onclick="addWorkCard('courseWorksGrid')">＋ เพิ่มผลงาน</button>
+    <div id="tab-course" class="port-content">
+      <div class="tab-badge">📚 กลุ่มคอร์สสอนทำเว็บ</div>
+      <div class="works-grid" id="grid-course"></div>
+      <button class="btn-add-large" onclick="createWorkCard('grid-course')">＋ เพิ่มคอร์สสอน</button>
     </div>
-  </div>
+  </section>
 
-  <div class="cute-box" id="howto">
-    <div class="box-title">วิธีสั่งซื้อ</div>
-    <div class="step-row"><div class="step-num">1</div><div class="step-text">ทัก FB หรือ Line เพื่อสอบถามคิวงาน</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text">ส่งข้อมูล รูปแบบ โทนสี ข้อความที่ต้องการ</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text">ตกลงราคาและชำระเงินล่วงหน้า</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text">รอรับงานสวยๆ ได้เลยภายใน 4 - 8 ชั่วโมง 🌸</div></div>
-  </div>
+  <section id="section-order" class="cute-section">
+    <h2 class="section-title"><span>📝</span> วิธีสั่งซื้อ <span>📝</span></h2>
+    <div class="step-container">
+      <div class="step-box">
+        <div class="step-number">1</div>
+        <div class="step-text">ทักแชท <b>Facebook</b> หรือ <b>Line</b> เพื่อสอบถามคิวงานและแจ้งรายละเอียดเบื้องต้น</div>
+      </div>
+      <div class="step-box">
+        <div class="step-number">2</div>
+        <div class="step-text">ส่งข้อมูลที่ต้องการให้ครบถ้วน (รูปแบบงาน, โทนสี, ข้อความ, รูปภาพ)</div>
+      </div>
+      <div class="step-box">
+        <div class="step-number">3</div>
+        <div class="step-text">แอดมินสรุปยอด <b>ลูกค้าชำระเงินเต็มจำนวน</b> เพื่อยืนยันการจองคิว</div>
+      </div>
+      <div class="step-box">
+        <div class="step-number">4</div>
+        <div class="step-text">รอรับความน่ารักได้เลยค่ะ! ใช้เวลาทำประมาณ <b>4 - 8 ชั่วโมง</b> 🌸</div>
+      </div>
+    </div>
+  </section>
 
-  <div class="cute-box" id="faq">
-    <div class="box-title">คำถามที่พบบ่อย</div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">จ่ายเงินช่องทางไหนได้บ้าง? <span>+</span></div>
-      <div class="faq-a">รับโอนผ่านบัญชีธนาคาร และ PromptPay จ้า</div>
+  <section id="section-faq" class="cute-section">
+    <h2 class="section-title"><span>❓</span> คำถามที่พบบ่อย <span>❓</span></h2>
+    <div class="faq-container">
+      <div class="faq-box">
+        <div class="faq-question" onclick="toggleFaq(this)">จ่ายเงินช่องทางไหนได้บ้างคะ? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">ทางร้านรับโอนผ่านบัญชีธนาคารทุกธนาคาร และรับผ่าน PromptPay (พร้อมเพย์) ค่ะ สะดวกช่องทางไหนแจ้งได้เลยนะคะ 🎀</div>
+      </div>
+      <div class="faq-box">
+        <div class="faq-question" onclick="toggleFaq(this)">ถ้างานออกมาไม่ถูกใจ แก้ไขได้ไหม? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">ลูกค้าสามารถแจ้งแก้ไขฟรีได้ 1 ครั้ง ก่อนส่งมอบไฟล์/ลิงก์จริงค่ะ หากส่งงานเรียบร้อยแล้วและต้องการแก้เพิ่ม จะมีค่าบริการจุดละ 5 บาทค่ะ 💕</div>
+      </div>
+      <div class="faq-box">
+        <div class="faq-question" onclick="toggleFaq(this)">มีเทมเพลตเว็บให้เลือกดูไหมคะ? <span class="faq-icon">+</span></div>
+        <div class="faq-answer">มีค่ะ! ทางร้านมีเทมเพลตหลากหลายสไตล์ให้เลือก สามารถทักแชทมาขอดูแบบตัวอย่างก่อนตัดสินใจได้เลย ยินดีให้คำปรึกษาค่ะ ✨</div>
+      </div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">แก้เยอะคิดเงินเพิ่มไหม? <span>+</span></div>
-      <div class="faq-a">แก้ฟรีได้ 1 ครั้งก่อนส่งงานนะคะ หลังจากนั้นจะคิดจุดละ 5 บาทค่ะ 💕</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">รองานนานสุดกี่ชั่วโมง? <span>+</span></div>
-      <div class="faq-a">ปกติ 4-8 ชั่วโมงค่ะ แต่ถ้าวันไหนคิวเยอะจริงๆ จะแจ้งให้ทราบก่อนรับงานนะคะ</div>
-    </div>
-  </div>
+  </section>
 
-  <footer>
-    <div class="footer-copy">design. @NONIOAEY 🌸</div>
+  <footer class="app-footer">
+    <div class="footer-text">design. @NONIOAEY 🌸</div>
   </footer>
 
-</div> <div class="modal-overlay" id="previewModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('previewModal')">✕</button>
-    <div style="font-family:'Itim'; font-size:18px; color:var(--pink-text);">✿ ดูตัวอย่างงาน ✿</div>
-    <div class="modal-link-box" id="modalLinkDisplay">—</div>
-    <div class="modal-btns">
-      <button class="cute-btn" style="background:var(--white); color:var(--pink-text); border:1px solid var(--pink-main);" onclick="copyLink()">คัดลอก</button>
-      <button class="cute-btn" onclick="goLink()">เปิดลิงก์ 🚀</button>
+</div> <div class="modal-bg" id="linkModal" onclick="closeModalOnOutsideClick(event, 'linkModal')">
+  <div class="modal-content">
+    <button class="btn-close-modal" onclick="closeModal('linkModal')">✕</button>
+    <div class="modal-title">✿ ดูตัวอย่างงาน ✿</div>
+    <div class="modal-link-display" id="modalLinkText">กำลังโหลด...</div>
+    <div class="modal-actions">
+      <button class="btn-cute btn-outline" style="margin-top:0;" onclick="copyToClipboard()">📋 คัดลอกลิงก์</button>
+      <button class="btn-cute" onclick="openLinkInNewTab()">🚀 เปิดเข้าเว็บ</button>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="imgModal" style="z-index: 600;">
-  <div class="img-modal-box">
-    <img id="imgModalSrc" src="" alt="preview">
-    <button class="img-close-btn" onclick="closeModal('imgModal')">✕</button>
+<div class="modal-bg" id="imageModal" style="z-index: 1100;" onclick="closeModalOnOutsideClick(event, 'imageModal')">
+  <div class="img-modal-content">
+    <button class="btn-close-img" onclick="closeModal('imageModal')">✕</button>
+    <img id="modalFullImage" src="" alt="Full Screen Work">
   </div>
 </div>
+
+<div class="toast" id="toastMsg">แจ้งเตือนระบบ</div>
 
 <script>
-// ===== AVATAR UPLOAD =====
-document.getElementById('avatarInput').addEventListener('change', function(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(ev){
-    const img = document.getElementById('avatarImg');
-    img.src = ev.target.result;
-    img.style.display = 'block';
-    document.getElementById('avatarIcon').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-});
+  // 1. ระบบจัดการ ID เพื่อสร้าง Element ใหม่ไม่ซ้ำกัน
+  let globalCounter = 100;
 
-// ===== ADD WORK CARD (WEB & PORTFOLIO) =====
-let cardCount = 0;
-function addWorkCard(gridId) {
-  const grid = document.getElementById(gridId);
-  const idx = cardCount++;
+  // 2. ฟังก์ชันอำนวยความสะดวก
+  function triggerUpload(inputId) {
+    document.getElementById(inputId).click();
+  }
+
+  function toggleDisplay(elementId) {
+    const el = document.getElementById(elementId);
+    if(el) el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toastMsg');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+  }
+
+  // 3. ฟังก์ชันอัปโหลดและแสดงตัวอย่างรูปภาพ (FileReader)
+  function previewImage(inputObj, imgId, placeholderId) {
+    const file = inputObj.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgEl = document.getElementById(imgId);
+      imgEl.src = e.target.result;
+      imgEl.style.display = 'block';
+      
+      const phEl = document.getElementById(placeholderId);
+      if (phEl) phEl.style.display = 'none';
+      
+      // ถ้าเป็นป้ายไอดี ให้เพิ่ม event กดขยายรูป
+      if(imgEl.parentElement.classList.contains('id-card')) {
+        imgEl.style.cursor = 'pointer';
+        imgEl.onclick = function(ev) {
+          ev.stopPropagation(); // กันไม่ให้ไปโดนปุ่มอัปโหลดซ้อน
+          openImageModal(e.target.result);
+        };
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // 4. ฟังก์ชันสร้างการ์ดผลงานเว็บ / ลิงก์ (Dynamic Element Creation)
+  function createWorkCard(gridId) {
+    const grid = document.getElementById(gridId);
+    const uniqueId = globalCounter++;
+    
+    const fileId = `file_dyn_${uniqueId}`;
+    const imgId = `img_dyn_${uniqueId}`;
+    const phId = `ph_dyn_${uniqueId}`;
+    const linkId = `link_dyn_${uniqueId}`;
+
+    const cardHTML = `
+      <div class="work-card">
+        <div class="work-img-box" onclick="triggerUpload('${fileId}')">
+          <div class="img-placeholder" id="${phId}"><i>🖼️</i>อัปโหลดรูป</div>
+          <img id="${imgId}" src="" alt="work">
+          <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="previewImage(this, '${imgId}', '${phId}')">
+        </div>
+        <div class="work-details">
+          <input type="text" class="work-input" placeholder="ตั้งชื่องาน...">
+          <input type="url" class="work-input link-input" id="${linkId}" placeholder="วางลิงก์เว็บ..." style="display:none;">
+          <button class="btn-cute" onclick="openLinkModal('${linkId}')">ดูตัวอย่าง 🔍</button>
+          <button class="btn-cute btn-outline" onclick="toggleDisplay('${linkId}')">✎ จัดการลิงก์</button>
+        </div>
+      </div>
+    `;
+    
+    // แปลง string เป็น HTML Node แล้วใส่ใน Grid
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = cardHTML;
+    grid.appendChild(tempDiv.firstElementChild);
+    showToast('เพิ่มกล่องผลงานสำเร็จ! 🌸');
+  }
+
+  // 5. ฟังก์ชันสร้างการ์ดป้ายไอดี (รูปอย่างเดียว)
+  function createIdCard(gridId) {
+    const grid = document.getElementById(gridId);
+    const uniqueId = globalCounter++;
+    
+    const fileId = `idfile_dyn_${uniqueId}`;
+    const imgId = `idimg_dyn_${uniqueId}`;
+    const phId = `idph_dyn_${uniqueId}`;
+
+    const cardHTML = `
+      <div class="id-card">
+        <div style="font-size:24px; color:var(--pink-main);" id="${phId}" onclick="triggerUpload('${fileId}')">➕</div>
+        <img id="${imgId}" src="">
+        <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="previewImage(this, '${imgId}', '${phId}')">
+      </div>
+    `;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = cardHTML;
+    grid.appendChild(tempDiv.firstElementChild);
+    showToast('เพิ่มกล่องรูปป้ายไอดีสำเร็จ! 🎀');
+  }
+
+  // 6. ระบบ Tabs กลุ่มผลงาน
+  function switchPortfolioTab(btnElement, targetId) {
+    // ลบ active class ออกจากปุ่มและคอนเทนต์ทั้งหมด
+    document.querySelectorAll('.port-tab').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.port-content').forEach(el => el.classList.remove('active'));
+    
+    // ใส่ active class ให้ปุ่มที่ถูกกดและคอนเทนต์เป้าหมาย
+    btnElement.classList.add('active');
+    document.getElementById(targetId).classList.add('active');
+  }
+
+  // 7. ระบบ FAQ Accordion
+  function toggleFaq(element) {
+    const box = element.parentElement;
+    const isOpen = box.classList.contains('open');
+    
+    // ปิดทุกกล่องก่อน (ถ้าต้องการให้เปิดได้ทีละอัน)
+    document.querySelectorAll('.faq-box').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.faq-icon').textContent = '+';
+    });
+
+    // ถ้าเดิมปิดอยู่ ให้เปิดกล่องนี้
+    if (!isOpen) {
+      box.classList.add('open');
+      box.querySelector('.faq-icon').textContent = '−';
+    }
+  }
+
+  // 8. ระบบจัดการ Modals (Popups)
+  let currentTargetLink = '';
+
+  function openLinkModal(inputId) {
+    const inputElement = document.getElementById(inputId);
+    if (!inputElement || inputElement.value.trim() === '') {
+      showToast('⚠️ กรุณากด "จัดการลิงก์" เพื่อใส่ลิงก์ก่อนนะคะ');
+      return;
+    }
+    currentTargetLink = inputElement.value.trim();
+    document.getElementById('modalLinkText').textContent = currentTargetLink;
+    document.getElementById('linkModal').classList.add('active');
+  }
+
+  function openImageModal(imgSrc) {
+    if(!imgSrc || imgSrc.includes('data:image') === false) return; // เช็คว่ามีรูปจริงๆ
+    document.getElementById('modalFullImage').src = imgSrc;
+    document.getElementById('imageModal').classList.add('active');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+  }
+
+  function closeModalOnOutsideClick(event, modalId) {
+    if (event.target.id === modalId) {
+      closeModal(modalId);
+    }
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(currentTargetLink).then(() => {
+      closeModal('linkModal');
+      showToast('คัดลอกลิงก์สำเร็จแล้วค่ะ 📋🌸');
+    }).catch(err => {
+      showToast('ไม่สามารถคัดลอกได้ กรุณาลองใหม่');
+    });
+  }
+
+  function openLinkInNewTab() {
+    // ตรวจสอบและเติม http:// ถ้าลืมใส่
+    let finalUrl = currentTargetLink;
+    if (!/^https?:\/\//i.test(finalUrl)) {
+      finalUrl = 'http://' + finalUrl;
+    }
+    window.open(finalUrl, '_blank');
+    closeModal('linkModal');
+  }
+
+  // 9. ระบบ Smooth Scroll นำทางเมนูหลัก
+  document.querySelectorAll('.nav-link').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      // อัปเดตสถานะปุ่ม Active
+      document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+      this.classList.add('active');
+
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      
+      if(targetSection) {
+        // เลื่อนหน้าจอโดยเผื่อระยะความสูงของ Navbar ไว้ 70px
+        const headerOffset = 70;
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
   
-  const fileId = `file_${idx}`;
-  const imgId = `img_${idx}`;
-  const titleId = `title_${idx}`;
-  const linkId = `link_${idx}`;
-
-  const card = document.createElement('div');
-  card.className = 'work-card';
-  card.innerHTML = `
-    <div class="work-img-wrap" onclick="document.getElementById('${fileId}').click()">
-      <div class="work-img-placeholder" id="ph_${imgId}"><span>🖼️</span>ใส่รูปภาพ</div>
-      <img id="${imgId}" src="" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
-      <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="loadImg('${fileId}','${imgId}','ph_${imgId}')">
-    </div>
-    <div class="work-info">
-      <input class="work-input" id="${titleId}" placeholder="หัวข้อชื่องาน..." type="text">
-      <input class="work-input" id="${linkId}" placeholder="วางลิงก์ที่นี่..." type="url" style="display:none;">
-      <button class="cute-btn" onclick="openPreview('${linkId}')">ดูตัวอย่าง</button>
-      <button class="cute-btn" style="background:var(--pink-bg); color:var(--text-light); margin-top:4px;" onclick="toggleLinkInput('${linkId}')">✎ ใส่ลิงก์</button>
-    </div>
-  `;
-  grid.appendChild(card);
-}
-
-function toggleLinkInput(linkId) {
-  const el = document.getElementById(linkId);
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-// ===== ADD ID CARD (IMAGE ONLY) =====
-let idCount = 0;
-function addIdCard() {
-  const grid = document.getElementById('idWorksGrid');
-  const idx = idCount++;
-  const fileId = `idfile_${idx}`;
-  const imgId = `idimg_${idx}`;
-
-  const wrap = document.createElement('div');
-  wrap.className = 'id-img-wrap';
-  wrap.innerHTML = `
-    <div style="font-size:24px; color:var(--border-color);" id="idph_${idx}" onclick="document.getElementById('${fileId}').click()">➕</div>
-    <img id="${imgId}" src="" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
-    <input type="file" id="${fileId}" accept="image/*" style="display:none" onchange="loadImg('${fileId}','${imgId}','idph_${idx}')">
-  `;
-  wrap.addEventListener('click', function(){
-    const img = document.getElementById(imgId);
-    if(img.src && img.style.display !== 'none') openImgModal(img.src);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    });
   });
-  grid.appendChild(wrap);
-}
 
-// ===== COMMON IMAGE LOADER =====
-function loadImg(fileId, imgId, phId) {
-  const file = document.getElementById(fileId).files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    document.getElementById(imgId).src = ev.target.result;
-    document.getElementById(imgId).style.display = 'block';
-    if(document.getElementById(phId)) document.getElementById(phId).style.display = 'none';
+  // สร้างกล่องตัวอย่างเริ่มต้นในแท็บต่างๆ (เพื่อให้เว็บไม่ดูโล่งตอนเปิดครั้งแรก)
+  window.onload = function() {
+    createWorkCard('grid-block');
+    createWorkCard('grid-rov');
   };
-  reader.readAsDataURL(file);
-}
-
-// ===== MODALS LOGIC =====
-let currentLink = '';
-function openPreview(linkId) {
-  const input = document.getElementById(linkId);
-  currentLink = input ? input.value.trim() : '';
-  if(!currentLink) { alert('คุณยังไม่ได้ใส่ลิงก์เลยน้า 🎀 (กดปุ่ม ✎ ใส่ลิงก์ ก่อนนะคะ)'); return; }
-  document.getElementById('modalLinkDisplay').textContent = currentLink;
-  document.getElementById('previewModal').classList.add('show');
-}
-function closeModal(id){ document.getElementById(id).classList.remove('show'); }
-function copyLink(){ navigator.clipboard.writeText(currentLink).then(()=>alert('คัดลอกลิงก์เรียบร้อย 🌸')); }
-function goLink(){ window.open(currentLink,'_blank'); }
-function openImgModal(src){ document.getElementById('imgModalSrc').src = src; document.getElementById('imgModal').classList.add('show'); }
-
-// ===== TABS =====
-function switchTab(btn, panelId){
-  document.querySelectorAll('.port-tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.port-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(panelId).classList.add('active');
-}
-
-// ===== FAQ ACCORDION =====
-function toggleFaq(el){
-  el.parentElement.classList.toggle('open');
-  el.querySelector('span').textContent = el.parentElement.classList.contains('open') ? '-' : '+';
-}
-
-// ===== SMOOTH SCROLL =====
-document.querySelectorAll('.nav-btn').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-  });
-});
 </script>
 </body>
 </html>
